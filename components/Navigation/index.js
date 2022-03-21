@@ -10,7 +10,12 @@ const { Navigator, Screen } = createStackNavigator();
 
 const RootNavigator = () => {
   return (
-    <Navigator initialRouteName="Home">
+    <Navigator initialRouteName="Registration">
+      <Screen name="Registration" component={Swiper} />
+      <Screen name="SignIn" component={Swiper} />
+      <Screen name="ResetPassword" component={Swiper} />
+      <Screen name="RegisterCompany" component={Swiper} />
+      <Screen name="RegisterJobseeker" component={Swiper} />
       <Screen name="Home" component={Swiper} />
       <Screen name="ChatLogs" component={ChatLogs} />
       <Screen name="ChatHistory" component={ChatHistory} />
