@@ -5,17 +5,22 @@ import Details from "../Pages/Details";
 import ChatHistory from "../Pages/ChatHistory";
 import ChatLogs from "../Pages/ChatLogs";
 import EditProfile from "../Pages/EditProfile";
+import Registration from "../Pages/Auth/Registration";
+import SignIn from "../Pages/Auth/SignIn";
+import ResetPassword from "../Pages/Auth/ResetPassword";
+import RegisterCompany from "../Pages/Auth/RegisterCompany";
+import RegisterJobseeker from "../Pages/Auth/RegisterJobseeker";
 
 const { Navigator, Screen } = createStackNavigator();
 
 const RootNavigator = () => {
   return (
     <Navigator initialRouteName="Registration">
-      <Screen name="Registration" component={Swiper} />
-      <Screen name="SignIn" component={Swiper} />
-      <Screen name="ResetPassword" component={Swiper} />
-      <Screen name="RegisterCompany" component={Swiper} />
-      <Screen name="RegisterJobseeker" component={Swiper} />
+      <Screen name="Registration" component={Registration} />
+      <Screen name="SignIn" component={SignIn} />
+      <Screen name="ResetPassword" component={ResetPassword} />
+      <Screen name="RegisterCompany" component={RegisterCompany} />
+      <Screen name="RegisterJobseeker" component={RegisterJobseeker} />
       <Screen name="Home" component={Swiper} />
       <Screen name="ChatLogs" component={ChatLogs} />
       <Screen name="ChatHistory" component={ChatHistory} />
