@@ -2,14 +2,30 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button } from "native-base";
 import React from "react";
 import authStore from "../../stores/authStore";
+import userStore from "../../stores/userStore";
+import { observer } from "mobx-react";
 
 const Swiper = ({ navigation }) => {
+  // if (authStore.user) {
+  //   // let users = userStore.getUsers();
+  //   // userStore.users
+  // }
+  const users = userStore.users.map((user) => (
+    <View>
+      <Text>{user.signUpAs}</Text>
+      <Text>{user.username}</Text>
+      <Text>{user.picture}</Text>
+    </View>
+  ));
+  console.log(userStore.users);
   return (
     <View style={styles.layout}>
       <Text>Swiper</Text>
       {authStore.user && <Text>{authStore.user.username}</Text>}
       {authStore.user && <Text>{authStore.user.type}</Text>}
 
+      {/* <Text>{userStore.users[0].signUpAs}</Text> */}
+      <View>{users}</View>
       <Button
         onPress={() => {
           // navigation.navigate("TripDetail", { trip: trip });
@@ -38,7 +54,7 @@ const Swiper = ({ navigation }) => {
   );
 };
 
-export default Swiper;
+export default observer(Swiper);
 
 const styles = StyleSheet.create({
   layout: {
