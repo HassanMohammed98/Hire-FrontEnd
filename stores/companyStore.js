@@ -11,13 +11,14 @@ class CompanyStore {
   getCompanies = async () => {
     try {
       const response = await instance.get("/company");
+
       this.companies = response.data;
-      console.log(response.data);
+      console.log("companies now...", response.data);
     } catch (error) {
       console.log("CompanyStore -> fetchcompany -> error", error);
     }
   };
 }
-const companytore = new CompanyStore();
-companytore.getCompanies();
+const companyStore = new CompanyStore();
+companyStore.getCompanies();
 export default userStore;
