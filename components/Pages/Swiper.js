@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "native-base";
 import React from "react";
+import authStore from "../../stores/authStore";
 
 const Swiper = ({ navigation }) => {
   return (
     <View style={styles.layout}>
       <Text>Swiper</Text>
+      {authStore.user && <Text>{authStore.user.username}</Text>}
 
       <Button
         onPress={() => {
