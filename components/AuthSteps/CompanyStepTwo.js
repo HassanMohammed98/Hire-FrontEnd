@@ -21,7 +21,7 @@ const CompanyStepTwo = ({ setStep, step, setUser, user, navigation }) => {
       <VStack space={3} style={{ marginTop: 6 }}>
         <Button
           onPress={() => {
-            // setStep(step + 1);
+            setStep(step + 1);
             // console.log("test");
             authStore.signup(user, toast, navigation);
           }}

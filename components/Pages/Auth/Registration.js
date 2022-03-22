@@ -9,7 +9,7 @@ const Registration = ({ navigation }) => {
       <Button
         onPress={() => {
           // navigation.navigate("TripDetail", { trip: trip });
-          navigation.navigate("RegisterCompany");
+          navigation.navigate("RegisterCompany", { type: "Company" });
         }}
       >
         SIGN UP as an Employer
@@ -17,7 +17,7 @@ const Registration = ({ navigation }) => {
 
       <Button
         onPress={() => {
-          navigation.navigate("RegisterJobseeker");
+          navigation.navigate("RegisterCompany", { type: "JobSeeker" });
         }}
       >
         SIGN UP as a Job Seeker

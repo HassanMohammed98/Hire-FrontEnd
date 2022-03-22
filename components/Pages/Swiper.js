@@ -8,6 +8,7 @@ const Swiper = ({ navigation }) => {
     <View style={styles.layout}>
       <Text>Swiper</Text>
       {authStore.user && <Text>{authStore.user.username}</Text>}
+      {authStore.user && <Text>{authStore.user.type}</Text>}
 
       <Button
         onPress={() => {

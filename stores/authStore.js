@@ -24,7 +24,8 @@ class AuthStore {
       toast.show({
         description: "User Registered",
       });
-      this.setUser(res.data.token, navigation, toast);
+      const reg = "signup";
+      this.setUser(res.data.token, navigation, toast, reg);
       console.log("AuthStore -> signup -> res.data.token", res.data.token);
     } catch (error) {
       console.log(error);
@@ -35,7 +36,8 @@ class AuthStore {
   signin = async (userData, navigation, toast) => {
     try {
       const res = await instance.post("/users/signin", userData);
-      this.setUser(res.data.token, navigation, toast);
+      const reg = "signin";
+      this.setUser(res.data.token, navigation, toast, reg);
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
     } catch (error) {
       console.log(error);
@@ -49,19 +51,21 @@ class AuthStore {
     } else {
       this.user = null;
       await AsyncStorage.removeItem("token");
-      navigation.navigate("SignIn");
+      navigation.navigate("Registration");
       toast.show({
         description: "Signed Out",
       });
     }
   };
 
-  setUser = async (token, navigation, toast) => {
+  setUser = async (token, navigation, toast, reg) => {
     await AsyncStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
     console.log(this.user);
-    navigation.navigate("Home");
+    if (reg === "signin") {
+      navigation.navigate("Home");
+    }
     // Toast.show(`Signed In`);
     toast.show({
       description: "Signed In",
