@@ -2,8 +2,9 @@ import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Button, HStack, useToast, VStack } from "native-base";
 import React, { useState } from "react";
+import jobSeekerStore from "../../stores/jobSeekerStore";
 
-const JobSeekerSetupOne = () => {
+const JobSeekerSetupOne = ({ navigation }) => {
   const toast = useToast();
   // let confirm = "";
   const [editUser, setEditUser] = useState({
@@ -63,8 +64,7 @@ const JobSeekerSetupOne = () => {
       <Button
         onPress={() => {
           console.log(editUser);
-          navigation.navigate("Home");
-
+          jobSeekerStore.createJobSeeker(editUser, navigation);
           // user.password === confirm?
           //   setStep(step + 1);
           toast.show({

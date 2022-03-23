@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Button } from "native-base";
+import { Button, ScrollView, VStack } from "native-base";
 import React from "react";
 import authStore from "../../stores/authStore";
 import userStore from "../../stores/userStore";
+import companyStore from "../../stores/companyStore";
+import jobSeekerStore from "../../stores/jobSeekerStore";
 import { observer } from "mobx-react";
 
 const Swiper = ({ navigation }) => {
@@ -11,21 +13,22 @@ const Swiper = ({ navigation }) => {
   //   // userStore.users
   // }
   const users = userStore.users.map((user) => (
-    <View>
+    <View key={user._id}>
       <Text>{user.signUpAs}</Text>
       <Text>{user.username}</Text>
       <Text>{user.picture}</Text>
     </View>
   ));
-  console.log(userStore.users);
+  // console.log(userStore.users);
+  // console.log(companyStore);
   return (
-    <View style={styles.layout}>
+    <VStack space={6} style={styles.layout}>
       <Text>Swiper</Text>
       {authStore.user && <Text>{authStore.user.username}</Text>}
       {authStore.user && <Text>{authStore.user.type}</Text>}
 
       {/* <Text>{userStore.users[0].signUpAs}</Text> */}
-      <View>{users}</View>
+      <ScrollView style={styles.view}>{users}</ScrollView>
       <Button
         onPress={() => {
           // navigation.navigate("TripDetail", { trip: trip });
@@ -50,7 +53,7 @@ const Swiper = ({ navigation }) => {
       >
         Edit Profile
       </Button>
-    </View>
+    </VStack>
   );
 };
 
@@ -60,7 +63,9 @@ const styles = StyleSheet.create({
   layout: {
     height: 500,
     display: "flex",
+    flex: 1,
     flexDirection: "column",
     justifyContent: "space-evenly",
   },
+  view: { borderColor: "black", borderWidth: 1, margin: 25 },
 });

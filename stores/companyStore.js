@@ -11,14 +11,27 @@ class CompanyStore {
   getCompanies = async () => {
     try {
       const response = await instance.get("/company");
-
       this.companies = response.data;
       console.log("companies now...", response.data);
     } catch (error) {
       console.log("CompanyStore -> fetchcompany -> error", error);
     }
   };
+
+  createCompany = async (profile, navigation) => {
+    try {
+      const response = await instance.post("/company", profile);
+      console.log(response.data);
+      this.companies.push(response.data);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: companyStore.js ~ line 16 ~ CompanyStore ~ createCompany= ~ error",
+        error
+      );
+    }
+  };
 }
 const companyStore = new CompanyStore();
 companyStore.getCompanies();
-export default userStore;
+export default companyStore;

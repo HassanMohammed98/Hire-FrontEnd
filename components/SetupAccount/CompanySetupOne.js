@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Button, useToast, VStack } from "native-base";
 import React, { useState } from "react";
+import companyStore from "../../stores/companyStore";
 
 const CompanySetupOne = ({ navigation }) => {
   const toast = useToast();
@@ -49,8 +50,8 @@ const CompanySetupOne = ({ navigation }) => {
       <Button
         onPress={() => {
           console.log(editUser);
-          navigation.navigate("Home");
-
+          companyStore.createCompany(editUser, navigation);
+          //   navigation.navigate("Home");
           // user.password === confirm?
           //   setStep(step + 1);
           toast.show({
