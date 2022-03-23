@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Button, ScrollView, VStack } from "native-base";
 import React from "react";
 import authStore from "../../stores/authStore";
@@ -8,17 +8,32 @@ import jobSeekerStore from "../../stores/jobSeekerStore";
 import { observer } from "mobx-react";
 
 const Swiper = ({ navigation }) => {
-  // if (authStore.user) {
-  //   // let users = userStore.getUsers();
-  //   // userStore.users
-  // }
-  const users = userStore.users.map((user) => (
-    <View key={user._id}>
-      <Text>{user.signUpAs}</Text>
-      <Text>{user.username}</Text>
-      <Text>{user.picture}</Text>
-    </View>
-  ));
+  let filteredUser;
+  if (authStore.user && authStore.user.type === "Company") {
+    filteredUser = jobSeekerStore.jobSeekers.map((jobseeker) => (
+      <View key={jobseeker._id} style={styles.item}>
+        <Text
+          onPress={() => {
+            navigation.navigate("Details", { details: jobseeker });
+          }}
+        >
+          {jobseeker.firstname} {jobseeker.lastname}
+        </Text>
+      </View>
+    ));
+  } else if (authStore.user && authStore.user.type === "JobSeeker") {
+    filteredUser = companyStore.companies.map((company) => (
+      <View key={company._id} style={styles.item}>
+        <Text
+          onPress={() => {
+            navigation.navigate("Details", { details: company });
+          }}
+        >
+          {company.founders} {company.type}
+        </Text>
+      </View>
+    ));
+  }
   // console.log(userStore.users);
   // console.log(companyStore);
   return (
@@ -28,7 +43,7 @@ const Swiper = ({ navigation }) => {
       {authStore.user && <Text>{authStore.user.type}</Text>}
 
       {/* <Text>{userStore.users[0].signUpAs}</Text> */}
-      <ScrollView style={styles.view}>{users}</ScrollView>
+      <ScrollView style={styles.view}>{filteredUser}</ScrollView>
       <Button
         onPress={() => {
           // navigation.navigate("TripDetail", { trip: trip });
@@ -68,4 +83,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   view: { borderColor: "black", borderWidth: 1, margin: 25 },
+  item: {
+    borderColor: "black",
+    borderWidth: 1,
+    margin: 10,
+    padding: 20,
+  },
 });
