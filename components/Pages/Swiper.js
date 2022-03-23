@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Button, ScrollView, VStack } from "native-base";
-import React from "react";
+import React, { useEffect } from "react";
 import authStore from "../../stores/authStore";
 import userStore from "../../stores/userStore";
 import companyStore from "../../stores/companyStore";
@@ -10,6 +10,10 @@ import { observer } from "mobx-react";
 const Swiper = ({ navigation }) => {
   let filteredUser;
   if (authStore.user && authStore.user.type === "Company") {
+    // useEffect(async () => {
+    //   await userStore.getOwner();
+    //   ;
+    // }, []);
     filteredUser = jobSeekerStore.jobSeekers.map((jobseeker) => (
       <View key={jobseeker._id} style={styles.item}>
         <Text
