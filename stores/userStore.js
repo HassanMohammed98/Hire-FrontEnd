@@ -10,10 +10,9 @@ class UserStore {
 
   getUsers = async () => {
     try {
-      console.log("??");
       const response = await instance.get("/users");
       this.users = response.data;
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log("UsersStore -> fetchUsers -> error", error);
     }

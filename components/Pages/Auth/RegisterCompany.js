@@ -41,7 +41,8 @@ const RegisterCompany = ({ route, navigation }) => {
       ) : step === 3 && type === "Company" ? (
         <CompanySetupOne navigation={navigation} />
       ) : (
-        step === 3 && type === "JobSeeker" && <JobSeekerSetupOne />
+        step === 3 &&
+        type === "JobSeeker" && <JobSeekerSetupOne navigation={navigation} />
       )}
     </View>
   );

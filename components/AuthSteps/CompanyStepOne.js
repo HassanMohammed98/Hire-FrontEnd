@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Button, useToast } from "native-base";
+import { Button, Flex, useToast } from "native-base";
 import React from "react";
 
 const CompanyStepOne = ({ setStep, step, setUser, user }) => {
@@ -8,6 +8,21 @@ const CompanyStepOne = ({ setStep, step, setUser, user }) => {
   // let confirm = "";
   return (
     <View>
+      <View
+        style={{
+          width: "100%",
+          borderColor: "black",
+          borderWidth: 1,
+          display: "flex",
+          alignItems: "center",
+          marginBottom: 50,
+          // justifyContent: ,
+        }}
+      >
+        <View style={styles.imageBox}>
+          <View style={styles.addbutton}></View>
+        </View>
+      </View>
       <TextInput
         style={styles.textInputName}
         onChangeText={(picture) => {
@@ -60,5 +75,26 @@ const styles = StyleSheet.create({
     margin: 4,
     padding: 4,
     height: 32,
+  },
+
+  imageBox: {
+    padding: 10,
+    borderColor: "black",
+    position: "relative",
+    borderWidth: 1,
+    height: 169,
+    aspectRatio: 1,
+    borderRadius: 85,
+  },
+  addbutton: {
+    height: 50,
+    aspectRatio: 1,
+    borderColor: "black",
+    position: "absolute",
+    borderWidth: 1,
+    borderRadius: 25,
+    bottom: 0,
+    right: 7,
+    backgroundColor: "red",
   },
 });
