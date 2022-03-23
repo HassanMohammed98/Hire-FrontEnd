@@ -8,12 +8,10 @@ import React from "react";
 const EditProfile = ({ navigation }) => {
   const toast = useToast();
 
-  const test = userStore.users.filter((foundUser) => {
-    foundUser._id == authStore.user._id;
-  });
+  const found = userStore.users.find(
+    (foundUser) => foundUser._id === authStore.user._id
+  );
 
-  console.log("saad Testing getOwner", test);
-  // console.log("saad Testing getOwner", userStore.users);
   return (
     <View style={styles.layout}>
       <Text>EditProfile</Text>
