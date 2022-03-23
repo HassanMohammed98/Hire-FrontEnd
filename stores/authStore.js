@@ -10,6 +10,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 class AuthStore {
   // make empty obj :
   user = null;
+
+  userOwner = null;
+
   constructor() {
     makeAutoObservable(this);
     // this will turn our class into a mobx store and all components can observe the changes that happen in the store
@@ -37,10 +40,21 @@ class AuthStore {
     try {
       const res = await instance.post("/users/signin", userData);
       const reg = "signin";
-      this.setUser(res.data.token, navigation, toast, reg);
+      await this.setUser(res.data.token, navigation, toast, reg);
+      await this.getOwner();
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  getOwner = async () => {
+    try {
+      const response = await instance.get("/users/getOwner");
+      this.userOwner = response.data;
+      // console.log(response.data);
+    } catch (error) {
+      console.log("OwnerStore -> fetchOwner -> error", error);
     }
   };
 

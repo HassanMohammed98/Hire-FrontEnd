@@ -10,10 +10,6 @@ import { observer } from "mobx-react";
 const Swiper = ({ navigation }) => {
   let filteredUser;
   if (authStore.user && authStore.user.type === "Company") {
-    // useEffect(async () => {
-    //   await userStore.getOwner();
-    //   ;
-    // }, []);
     filteredUser = jobSeekerStore.jobSeekers.map((jobseeker) => (
       <View key={jobseeker._id} style={styles.item}>
         <Text
