@@ -39,7 +39,7 @@ const SignIn = ({ navigation }) => {
           // console.log("test");
         }}
       >
-        NEXT
+        Sign IN
       </Button>
     </View>
   );
