@@ -4,7 +4,15 @@ import React from "react";
 import AppLoading from "expo-app-loading";
 import { useFonts, Righteous_400Regular } from "@expo-google-fonts/righteous";
 
-const AuthButtons = ({ text, Width, navigation, screen, params }) => {
+const AuthButtons = ({
+  text,
+  Width,
+  navigation,
+  screen,
+  params,
+  action,
+  props,
+}) => {
   let [fontsLoaded] = useFonts({
     Righteous_400Regular,
   });
@@ -17,7 +25,9 @@ const AuthButtons = ({ text, Width, navigation, screen, params }) => {
       <Button
         onPress={() => {
           {
-            params
+            action
+              ? action(props.user, navigation, props.toast)
+              : params
               ? navigation.navigate(screen, params)
               : navigation.navigate(screen);
           }

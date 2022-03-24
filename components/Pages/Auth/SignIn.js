@@ -3,6 +3,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { Button, VStack, useToast } from "native-base";
 import authStore from "../../../stores/authStore";
 import React, { useState } from "react";
+import AuthButtons from "../../miniComponents/Buttons/AuthButtons";
 
 const SignIn = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -32,15 +33,29 @@ const SignIn = ({ navigation }) => {
           Forgot Password?
         </Text>
       </VStack>
-      <Button
+      {/* <Button
         onPress={() => {
           authStore.signin(user, navigation, toast);
           // setStep(step + 1);
           // console.log("test");
         }}
       >
-        Sign IN
-      </Button>
+
+        NEXT
+      </Button> */}
+      <AuthButtons
+        navigation={navigation}
+        // screen={"RegisterCompany"}
+        // params={{ type: "Company" }}
+        props={{ user: user, toast: toast }}
+        action={authStore.signin}
+        text={"SIGN IN"}
+        Width={"73.4%"}
+      />
+
+//         Sign IN
+//       </Button>
+
     </View>
   );
 };
