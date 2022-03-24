@@ -34,5 +34,5 @@ class JobSeekerStore {
   };
 }
 const jobSeekerStore = new JobSeekerStore();
-jobSeekerStore.getJobSeekers();
+// jobSeekerStore.getJobSeekers();
 export default jobSeekerStore;
