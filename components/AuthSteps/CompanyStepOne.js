@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Button, Flex, useToast } from "native-base";
+import { Button, useToast } from "native-base";
 import React from "react";
 
 const CompanyStepOne = ({ setStep, step, setUser, user }) => {

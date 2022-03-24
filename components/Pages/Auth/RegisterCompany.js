@@ -4,6 +4,7 @@ import CompanyStepOne from "../../AuthSteps/CompanyStepOne";
 import CompanyStepTwo from "../../AuthSteps/CompanyStepTwo";
 import CompanySetupOne from "../../SetupAccount/CompanySetupOne";
 import JobSeekerSetupOne from "../../SetupAccount/JobSeekerSetupOne";
+import AuthButtons from "../../miniComponents/Buttons/AuthButtons";
 
 const RegisterCompany = ({ route, navigation }) => {
   const { type } = route.params;
@@ -14,6 +15,7 @@ const RegisterCompany = ({ route, navigation }) => {
     password: "",
     email: "",
     search: "",
+    status: "Available",
     Languages: "",
     loginType: "Hire-APP",
     signUpAs: type,
@@ -44,6 +46,7 @@ const RegisterCompany = ({ route, navigation }) => {
         step === 3 &&
         type === "JobSeeker" && <JobSeekerSetupOne navigation={navigation} />
       )}
+      <AuthButtons text={"SIGN UP as an Employer"} Width={"73.4%"} />
     </View>
   );
 };

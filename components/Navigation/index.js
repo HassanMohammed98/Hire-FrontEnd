@@ -16,12 +16,16 @@ const { Navigator, Screen } = createStackNavigator();
 const RootNavigator = () => {
   return (
     <Navigator initialRouteName="Registration">
-      <Screen name="Registration" component={Registration} />
+      <Screen
+        name="Registration"
+        component={Registration}
+        options={{ headerShown: false }}
+      />
       <Screen name="SignIn" component={SignIn} />
       <Screen name="ResetPassword" component={ResetPassword} />
       <Screen name="RegisterCompany" component={RegisterCompany} />
       <Screen name="RegisterJobseeker" component={RegisterJobseeker} />
-      <Screen name="Home" component={Swiper} />
+      <Screen name="Home" component={Swiper} options={{ headerShown: false }} />
       <Screen name="ChatLogs" component={ChatLogs} />
       <Screen name="ChatHistory" component={ChatHistory} />
       <Screen name="Details" component={Details} />
