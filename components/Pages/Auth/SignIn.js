@@ -40,6 +40,7 @@ const SignIn = ({ navigation }) => {
           // console.log("test");
         }}
       >
+
         NEXT
       </Button> */}
       <AuthButtons
@@ -51,6 +52,10 @@ const SignIn = ({ navigation }) => {
         text={"SIGN IN"}
         Width={"73.4%"}
       />
+
+//         Sign IN
+//       </Button>
+
     </View>
   );
 };

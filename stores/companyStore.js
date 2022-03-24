@@ -33,5 +33,5 @@ class CompanyStore {
   };
 }
 const companyStore = new CompanyStore();
-companyStore.getCompanies();
+// companyStore.getCompanies();
 export default companyStore;

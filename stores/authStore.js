@@ -4,6 +4,8 @@ import { instance } from "./instance";
 // import jwt-decode to check the token:
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import companyStore from "./companyStore";
+import jobSeekerStore from "./jobSeekerStore";
 
 //! make sure of the code ::
 // make auth store - sign up - sign in:
@@ -77,6 +79,8 @@ class AuthStore {
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
     console.log(this.user);
+    await companyStore.getCompanies();
+    await jobSeekerStore.getJobSeekers();
     if (reg === "signin") {
       navigation.navigate("Home");
     }
