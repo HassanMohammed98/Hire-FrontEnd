@@ -25,7 +25,7 @@ const EditProfile = ({ navigation }) => {
       (jobSeeker) => jobSeeker.user === authStore.user._id
     );
   }
-  console.log(owner);
+  console.log("HassanTesting 55", owner);
 
   // setEditProfile(userProfile);
   return (

@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Button, VStack, useToast } from "native-base";
+import { Button, VStack, useToast, HStack } from "native-base";
 import authStore from "../../../stores/authStore";
 import React, { useState } from "react";
 import AuthButtons from "../../miniComponents/Buttons/AuthButtons";
+import AuthHeading from "../../miniComponents/Header/AuthHeading";
+import SignUpDiv from "../../miniComponents/SVG/SignUpDiv";
 
 const SignIn = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -12,46 +14,72 @@ const SignIn = ({ navigation }) => {
     // loginType: "Hire-APP",
   });
   const toast = useToast();
+  const signin = () => {
+    authStore.signin(user, navigation, toast);
+  };
   return (
-    <View style={styles.layout}>
-      <VStack space={6} style={{ marginTop: 6 }}>
-        <TextInput
-          style={styles.textInputName}
-          onChangeText={(username) => setUser({ ...user, username })}
-          placeholder="UserName"
+    <View style={styles.screen}>
+      <View style={styles.layout}>
+        <AuthHeading
+          title={"SIGN IN"}
+          size={27.4}
+          marginLeft={"-1.87%"}
+          color={"black"}
         />
-        <TextInput
-          style={styles.textInputName}
-          onChangeText={(password) => setUser({ ...user, password })}
-          placeholder="Password"
-        />
-        <Text
-          onPress={() => {
-            navigation.navigate("ResetPassword");
-          }}
-        >
-          Forgot Password?
-        </Text>
-      </VStack>
-      {/* <Button
-        onPress={() => {
-          authStore.signin(user, navigation, toast);
-          // setStep(step + 1);
-          // console.log("test");
-        }}
-      >
-
-        NEXT
-      </Button> */}
-      <AuthButtons
-        navigation={navigation}
-        // screen={"RegisterCompany"}
-        // params={{ type: "Company" }}
-        props={{ user: user, toast: toast }}
-        action={authStore.signin}
-        text={"SIGN IN"}
-        Width={"73.4%"}
-      />
+        <VStack space={10}>
+          <VStack style={{ marginTop: 6 }} space={1.5}>
+            <VStack space={6}>
+              <TextInput
+                style={styles.textInputName}
+                onChangeText={(username) => setUser({ ...user, username })}
+                placeholder="UserName"
+              />
+              <TextInput
+                style={styles.textInputName}
+                onChangeText={(password) => setUser({ ...user, password })}
+                placeholder="Password"
+              />
+            </VStack>
+            <View style={styles.forgot}>
+              <AuthHeading
+                marginLeft={0}
+                title={"Forgot Password?"}
+                size={12.5}
+                navigation={navigation}
+                screen={"ResetPassword"}
+                color={"rgb(48, 71, 94)"}
+              />
+            </View>
+          </VStack>
+          <AuthButtons action={signin} text={"SIGN IN"} Width={"100%"} />
+        </VStack>
+        <View style={styles.footer}>
+          <SignUpDiv />
+          <HStack>
+            <AuthHeading
+              title={"Dont have an Account?"}
+              size={12.5}
+              marginLeft={0}
+              color={"black"}
+            />
+            <AuthHeading
+              title={"Sign UP"}
+              size={12.5}
+              navigation={navigation}
+              screen={"Registration"}
+              marginLeft={5}
+              color={"rgb(48, 71, 94)"}
+            />
+            {/* <Text
+              onPress={() => {
+                navigation.navigate("Registration");
+              }}
+            >
+              Sign UP
+            </Text> */}
+          </HStack>
+        </View>
+      </View>
     </View>
   );
 };
@@ -59,13 +87,24 @@ const SignIn = ({ navigation }) => {
 export default SignIn;
 
 const styles = StyleSheet.create({
-  layout: {
-    height: 500,
-    display: "flex",
+  screen: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    // borderColor: "black",
+    // borderWidth: 10,
+  },
+  layout: {
+    height: "79.4%",
+    width: "73.4%",
+    display: "flex",
+    // flex: 1,
     // backgroundColor: "white",
+    // borderColor: "black",
+    // borderWidth: 2,
     flexDirection: "column",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
   },
 
   textInputName: {
@@ -74,5 +113,16 @@ const styles = StyleSheet.create({
     margin: 4,
     padding: 4,
     height: 32,
+  },
+  forgot: {
+    width: "100%",
+    alignItems: "flex-end",
+    paddingRight: 10,
+  },
+  footer: {
+    height: "28.78%",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });
