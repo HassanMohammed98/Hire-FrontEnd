@@ -5,6 +5,7 @@ import UserProfile from "../SVG/UserProfile";
 import CompanyProfile from "../SVG/CompanyProfile";
 import { Button, Image, useToast, VStack } from "native-base";
 import React from "react";
+import { baseURL } from "../../../stores/instance";
 
 const AddViewImage = ({ user, setUser }) => {
   const AddImage = async () => {
@@ -28,6 +29,7 @@ const AddViewImage = ({ user, setUser }) => {
           type: `image/${fileType}`,
         },
       });
+      console.log(user.picture);
     }
   };
 
@@ -49,12 +51,24 @@ const AddViewImage = ({ user, setUser }) => {
               height: 169,
               aspectRatio: 1,
               zIndex: -1,
-              borderRadius: 100,
+              // borderRadius: 100,
               // borderColor: "black",
               // borderWidth: 3,
             }}
             alt="Profile Image"
             source={{ uri: user.picture.uri }}
+          />
+        ) : user.picture.length > 1 ? (
+          <Image
+            style={{
+              height: 169,
+              aspectRatio: 1,
+              zIndex: -1,
+              // resizeMode: "contain",
+              borderRadius: 100,
+            }}
+            alt="Company Profile Image"
+            source={{ uri: baseURL + user.picture }}
           />
         ) : user.signUpAs === "Company" ? (
           // <CompanyProfile height={166} />
