@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { Button, ScrollView, useToast, VStack } from "native-base";
 import authStore from "../../stores/authStore";
 import userStore from "../../stores/userStore";
@@ -7,12 +7,21 @@ import companyStore from "../../stores/companyStore";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
+import { baseURL } from "../../stores/instance";
+import AddViewImage from "../miniComponents/Buttons/AddViewImage";
+import AuthButtons from "../miniComponents/Buttons/AuthButtons";
 
 const EditProfile = ({ navigation }) => {
   const toast = useToast();
   const owner = authStore.userOwner;
-  const [editProfile, setEditProfile] = useState({});
+  const [editProfile, setEditProfile] = useState(owner);
   const [editProfileJC, setEditProfileJC] = useState({});
+
+  const submit = () => {
+    const updateProfile = { owner: editProfile, profile: editProfileJC };
+    console.log(updateProfile);
+    authStore.updateProfile(updateProfile);
+  };
 
   let userProfile;
   if (authStore.user && authStore.user.type === "Company") {
@@ -33,7 +42,19 @@ const EditProfile = ({ navigation }) => {
       <Text>EditProfile</Text>
       <VStack space={50}>
         <VStack style={styles.owner}>
-          <Text>{owner.picture}</Text>
+          {/* <Image
+            style={{
+              height: 90,
+              aspectRatio: 1,
+              zIndex: -1,
+              borderRadius: 100,
+
+              // borderColor: "black",
+              // borderWidth: 3,
+            }}
+            source={{ uri: baseURL + owner.picture }}
+          /> */}
+          <AddViewImage user={editProfile} setUser={setEditProfile} />
           <Text>User Name: {owner.username}</Text>
           <Text>NEW User Name: {editProfile.username}</Text>
           <TextInput
@@ -216,6 +237,7 @@ const EditProfile = ({ navigation }) => {
           )
         )}
       </VStack>
+      <AuthButtons action={submit} text={"SAVE"} Width={"80%"} />
 
       <Button
         style={styles.button}
