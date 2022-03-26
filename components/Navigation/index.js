@@ -21,9 +21,17 @@ const RootNavigator = () => {
         component={Registration}
         options={{ headerShown: false }}
       />
-      <Screen name="SignIn" component={SignIn} />
+      <Screen
+        name="SignIn"
+        component={SignIn}
+        options={{ headerShown: false }}
+      />
       <Screen name="ResetPassword" component={ResetPassword} />
-      <Screen name="RegisterCompany" component={RegisterCompany} />
+      <Screen
+        name="RegisterCompany"
+        component={RegisterCompany}
+        options={{ headerShown: false }}
+      />
       <Screen name="RegisterJobseeker" component={RegisterJobseeker} />
       <Screen name="Home" component={Swiper} options={{ headerShown: false }} />
       <Screen name="ChatLogs" component={ChatLogs} />
