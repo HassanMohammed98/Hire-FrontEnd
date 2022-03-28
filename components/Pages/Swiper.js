@@ -55,14 +55,6 @@ const Swiper = ({ navigation }) => {
 
       <Button
         onPress={() => {
-          navigation.navigate("Details");
-        }}
-      >
-        View Employee / Company CV
-      </Button>
-
-      <Button
-        onPress={() => {
           navigation.navigate("EditProfile");
         }}
       >

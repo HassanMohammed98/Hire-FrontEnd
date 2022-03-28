@@ -12,6 +12,7 @@ const AuthButtons = ({
   params,
   action,
   props,
+  plainAction,
 }) => {
   let [fontsLoaded] = useFonts({
     Righteous_400Regular,
@@ -25,11 +26,11 @@ const AuthButtons = ({
       <Button
         onPress={() => {
           {
-            action
-              ? action(props.user, navigation, props.toast)
-              : params
+            action && action();
+            plainAction && plainAction();
+            params && navigation
               ? navigation.navigate(screen, params)
-              : navigation.navigate(screen);
+              : navigation && navigation.navigate(screen);
           }
         }}
         style={{

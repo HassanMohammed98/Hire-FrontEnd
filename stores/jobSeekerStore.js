@@ -18,7 +18,11 @@ class JobSeekerStore {
       console.log("jobSeekerStore -> fetchJobSeeker -> error", error);
     }
   };
-
+  updateJobSeeker = (updateJobSeeker) => {
+    this.jobSeekers = this.jobSeekers.map((jobSeeker) =>
+      jobSeeker._id === updateJobSeeker._id ? updateJobSeeker : jobSeeker
+    );
+  };
   createJobSeeker = async (profile, navigation) => {
     try {
       const response = await instance.post("/jobseeker", profile);

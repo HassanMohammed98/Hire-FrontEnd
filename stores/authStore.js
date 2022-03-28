@@ -23,14 +23,24 @@ class AuthStore {
   // signup methods:
   signup = async (userData, toast, navigation) => {
     try {
-      const res = await instance.post("/users/signup", userData);
-      console.log("test3");
+      const formData = new FormData();
+      for (const key in userData) {
+        formData.append(key, userData[key]);
+      }
+      const res = await instance.post("/users/signup", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        transformRequest: (data, headers) => {
+          return formData;
+        },
+      });
+      // console.log("test3");
       // Toast.show(`User Registered`);
       toast.show({
         description: "User Registered",
       });
       const reg = "signup";
-      this.setUser(res.data.token, navigation, toast, reg);
+      await this.setUser(res.data.token, navigation, toast, reg);
+      await this.getOwner();
       console.log("AuthStore -> signup -> res.data.token", res.data.token);
     } catch (error) {
       console.log(error);
@@ -42,9 +52,15 @@ class AuthStore {
     try {
       const res = await instance.post("/users/signin", userData);
       const reg = "signin";
+      // if (res.data.token) {
       await this.setUser(res.data.token, navigation, toast, reg);
       await this.getOwner();
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
+      // } else {
+      //   toast.show({
+      //     description: "Check fields",
+      //   });
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -57,6 +73,33 @@ class AuthStore {
       // console.log(response.data);
     } catch (error) {
       console.log("OwnerStore -> fetchOwner -> error", error);
+    }
+  };
+  updateProfile = async (updatedProfile) => {
+    try {
+      const formData = new FormData();
+      for (const key in updatedProfile) {
+        formData.append(key, updatedProfile[key]);
+      }
+      const res = await instance.put("/users/editprofile", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        transformRequest: (data, headers) => {
+          return formData;
+        },
+      });
+      this.userOwner = res.data.owner;
+      if (res.sata.owner.signUpAs === "Company") {
+        companyStore.updateCompany(res.data.profile);
+      } else if (res.sata.owner.signUpAs === "jobSeeker") {
+        jobSeekerStore.updateJobSeeker(res.data.profile);
+      }
+
+      // const res = await instance.put(/ updatedProduct);
+      // this.products = this.products.map((product) =>
+      //   product._id === productId ? res.data : product
+      // );
+    } catch (error) {
+      console.log("AuthStore -> updateProfile -> error", error);
     }
   };
 

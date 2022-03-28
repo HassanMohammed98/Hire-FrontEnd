@@ -1,67 +1,50 @@
 import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Button, useToast } from "native-base";
-import React from "react";
+import { Button, Image, useToast, VStack } from "native-base";
+import React, { useState } from "react";
+import AuthButtons from "../miniComponents/Buttons/AuthButtons";
+import AddViewImage from "../miniComponents/Buttons/AddViewImage";
 
 const CompanyStepOne = ({ setStep, step, setUser, user }) => {
   const toast = useToast();
-  // let confirm = "";
+  const [confirm, setConfirm] = useState("");
+
+  const check = () => {
+    if (confirm === user.password) {
+      setStep();
+    } else {
+      toast.show({
+        description: "Password Does Not Match!",
+      });
+    }
+  };
+
   return (
-    <View>
-      <View
-        style={{
-          width: "100%",
-          borderColor: "black",
-          borderWidth: 1,
-          display: "flex",
-          alignItems: "center",
-          marginBottom: 50,
-          // justifyContent: ,
-        }}
-      >
-        <View style={styles.imageBox}>
-          <View style={styles.addbutton}></View>
-        </View>
-      </View>
-      <TextInput
-        style={styles.textInputName}
-        onChangeText={(picture) => {
-          setUser({ ...user, picture });
-        }}
-        placeholder="Picture"
-      />
-      <TextInput
-        style={styles.textInputName}
-        onChangeText={(username) => setUser({ ...user, username })}
-        placeholder="UserName"
-      />
-      <TextInput
-        style={styles.textInputName}
-        onChangeText={(password) => setUser({ ...user, password })}
-        placeholder="Password"
-      />
-      {/* <TextInput
-        style={styles.textInputName}
-        onChangeText={(check) => (confirm = check)}
-        placeholder="Confirm Password"
-      /> */}
-      <TextInput
-        style={styles.textInputName}
-        onChangeText={(email) => setUser({ ...user, email })}
-        placeholder="Email"
-      />
-      <Button
-        onPress={() => {
-          console.log(user);
-          // user.password === confirm?
-          setStep(step + 1);
-          // : toast.show({
-          //     description: "Password Does Not Match!",
-          //   });
-        }}
-      >
-        NEXT
-      </Button>
+    <View style={styles.stepOne}>
+      <AddViewImage setUser={setUser} user={user} />
+      <VStack space={6} style={{ marginTop: 13, marginBottom: 13 }}>
+        <TextInput
+          style={styles.textInputName}
+          onChangeText={(username) => setUser({ ...user, username })}
+          placeholder="UserName"
+        />
+        <TextInput
+          style={styles.textInputName}
+          onChangeText={(password) => setUser({ ...user, password })}
+          placeholder="Password"
+        />
+        <TextInput
+          style={styles.textInputName}
+          onChangeText={(check) => setConfirm(check)}
+          placeholder="Confirm Password"
+        />
+        <TextInput
+          style={styles.textInputName}
+          onChangeText={(email) => setUser({ ...user, email })}
+          placeholder="Email"
+        />
+      </VStack>
+      <AuthButtons plainAction={check} text={"Continue"} Width={"100%"} />
     </View>
   );
 };
@@ -69,32 +52,17 @@ const CompanyStepOne = ({ setStep, step, setUser, user }) => {
 export default CompanyStepOne;
 
 const styles = StyleSheet.create({
+  stepOne: {
+    // borderColor: "black",
+    // borderWidth: 1,
+    flex: 1,
+    justifyContent: "space-evenly",
+  },
   textInputName: {
     borderBottomColor: "black",
     borderBottomWidth: 1,
     margin: 4,
     padding: 4,
     height: 32,
-  },
-
-  imageBox: {
-    padding: 10,
-    borderColor: "black",
-    position: "relative",
-    borderWidth: 1,
-    height: 169,
-    aspectRatio: 1,
-    borderRadius: 85,
-  },
-  addbutton: {
-    height: 50,
-    aspectRatio: 1,
-    borderColor: "black",
-    position: "absolute",
-    borderWidth: 1,
-    borderRadius: 25,
-    bottom: 0,
-    right: 7,
-    backgroundColor: "red",
   },
 });
