@@ -1,51 +1,131 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
-import { HStack, VStack } from "native-base";
+import { HStack, VStack, Image } from "native-base";
+import { baseURL } from "../../stores/instance";
 
 const ViewJobSeeker = ({ viewUser, details }) => {
   return (
-    <VStack space={15} style={styles.detailsPage}>
-      <HStack>
-        <Text> {viewUser.picture} </Text>
-        <VStack w={"100%"} style={styles.header}>
+    <ScrollView space={1} style={styles.detailsPage}>
+      <HStack style={styles.headerLayout} h={70} w={"100%"}>
+        {/* <Text> {viewUser.picture} </Text> */}
+        {
+          viewUser.picture.length > 1 ? (
+            <Image
+              style={{
+                height: "100%",
+                aspectRatio: 1,
+                zIndex: -1,
+                borderRadius: 100,
+                // borderColor: "black",
+                // borderWidth: 3,
+              }}
+              alt="Profile Image"
+              source={{ uri: baseURL + viewUser.picture }}
+            />
+          ) : (
+            // <CompanyProfile height={166} />
+            // <Image
+            //   style={{
+            //     height: 50,
+            //     aspectRatio: 1,
+            //     zIndex: -1,
+            //     borderRadius: 100,
+            //     // borderColor: "black",
+            //     // borderWidth: 3,
+            //   }}
+            //   alt="JobSeeker Profile Image"
+            //   source={require("../../assets/userProfile.png")}
+            // />
+            // <UserProfile height={2} />
+            // <Text>Hello world</Text>
+            <Image
+              style={{
+                width: "22%",
+                aspectRatio: 1,
+              }}
+              alt="JobSeeker Profile Image"
+              source={require("../../assets/userProfile.png")}
+            />
+          )
+          // ) : (
+          //   user.signUpAs === "JobSeeker" && <UserProfile height={165} />
+        }
+        <VStack w={"100%"} h={"60%"} style={styles.header}>
           <HStack>
             {details.prefix.length > 1 && <Text>{details.prefix} </Text>}
             {details.firstname.length > 1 && <Text>{details.firstname}</Text>}
             {details.lastname.length > 1 && <Text> {details.lastname} </Text>}
           </HStack>
-
           {details.skils.length > 1 && <Text>{details.skils}</Text>}
           {details.gender.length > 1 && <Text>{details.gender}</Text>}
         </VStack>
       </HStack>
       <VStack w={"100%"} style={styles.bodyOne} space={2}>
         <Text style={styles.aboutHeader}> About Me </Text>
-        <Text>
+        <Text style={styles.aboutHeaderBlack}>
           {" "}
           I am flexible and experienced individual with great experience in many
           fields especialy coding.{" "}
         </Text>
       </VStack>
-      {details.education.length > 0 && (
-        <VStack w={"100%"} style={styles.bodyTwo} space={2}>
-          <Text style={styles.aboutHeader}>Education</Text>
-          <Text>Regis University: DBA in Business Administration</Text>
-          <Text>CODED: Fullstack Bootcamp</Text>
-        </VStack>
-      )}
-      {details.experience.length > 0 && (
-        <VStack w={"100%"} style={styles.bodyTwo} space={2}>
-          <Text style={styles.aboutHeader}>Experience</Text>
-          <Text>
-            Junior Developer @Coded Fullstack Developer React, React Native,
-            Javascript, CSS and HTML
-          </Text>
-          <Text>
-            Business Administration Officer Developing the company revenue by
-            constantly lorem ipsum hutai kolomen
-          </Text>
-        </VStack>
-      )}
+      {/* {details.education.length > 0 && ( */}
+      <VStack w={"100%"} style={styles.bodyTwo} space={2}>
+        <Text style={styles.aboutHeader}>Education</Text>
+        <Text>Regis University: DBA in Business Administration</Text>
+        <Text>CODED: Fullstack Bootcamp</Text>
+      </VStack>
+      {/* // )} */}
+      {/* {details.experience.length > 0 && ( */}
+      <VStack w={"100%"} style={styles.bodyTwo} space={2}>
+        <Text style={styles.aboutHeader}>Experience</Text>
+        <HStack style={styles.jobOpenning}>
+          <Image
+            style={{
+              width: "22%",
+              aspectRatio: 1,
+            }}
+            alt="JobSeeker Profile Image"
+            source={require("../../assets/userProfile.png")}
+          />
+          <VStack style={styles.positionOpen}>
+            <Text style={[styles.JobTitleOne]}>
+              Junior Developer @Coded Fullstack Developer React, React Native,
+              Javascript, CSS and HTML
+            </Text>
+            <Text style={styles.positionBody}>
+              Responsible for growing company revenue by effectively managing
+              existing customer accounts and convincing new customers to
+              purchase company services .Leading a team of Account Executives,
+              developing effective marketing proposals, and solicit customer
+              feedback.
+            </Text>
+          </VStack>
+        </HStack>
+        <HStack style={styles.jobOpenning}>
+          <Image
+            style={{
+              width: "22%",
+              aspectRatio: 1,
+            }}
+            alt="JobSeeker Profile Image"
+            source={require("../../assets/userProfile.png")}
+          />
+          <VStack style={styles.positionOpen}>
+            <Text style={[styles.JobTitleOne]}>
+              Business Administration Officer Needed @Coded to do Administration
+              work
+            </Text>
+            <Text style={styles.positionBody}>
+              Responsible for growing company revenue by effectively managing
+              existing customer accounts and convincing new customers to
+              purchase company services .Leading a team of Account Executives,
+              developing effective marketing proposals, and solicit customer
+              feedback.
+            </Text>
+          </VStack>
+        </HStack>
+      </VStack>
+      {/* )} */}
       <HStack w={"100%"} style={styles.footer}>
         {/* Fix Skills Naming */}
         {details.skils.length > 0 && (
@@ -66,17 +146,25 @@ const ViewJobSeeker = ({ viewUser, details }) => {
           </VStack>
         )}
       </HStack>
-    </VStack>
+    </ScrollView>
   );
 };
-
 export default ViewJobSeeker;
-
 const styles = StyleSheet.create({
+  headerLayout: {
+    display: "flex",
+    alignItems: "center",
+    marginLeft: 30,
+    // borderWidth: 1,
+    // borderColor: "black",
+    marginTop: 20,
+  },
   header: {
+    display: "flex",
+    justifyContent: "space-evenly",
     // borderColor: "black",
     // borderWidth: 1,
-    padding: 15,
+    paddingLeft: 15,
     // marginTop: 5,
   },
   bodyOne: {
@@ -88,6 +176,11 @@ const styles = StyleSheet.create({
   aboutHeader: {
     color: "red",
     fontSize: 15,
+    fontWeight: "bold",
+  },
+  aboutHeaderBlack: {
+    fontSize: 15,
+    textAlign: "center",
   },
   bodyTwo: {
     // borderColor: "black",
@@ -103,8 +196,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   bodyThree: {
-    borderColor: "black",
-    borderWidth: 1,
+    // borderColor: "black",
+    // borderWidth: 1,
     padding: 15,
     paddingLeft: 50,
   },
@@ -113,9 +206,29 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     // borderWidth: 1,
     display: "flex",
-    justifyContent: "space-between",
   },
   footer: {
     marginBottom: 100,
+  },
+  border: {
+    borderColor: "black",
+    borderWidth: 1,
+  },
+  JobTitleOne: {
+    fontWeight: "bold",
+  },
+  jobOpenning: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+
+    position: "relative",
+  },
+  positionOpen: {
+    position: "relative",
+    width: "75%",
+  },
+  positionBody: {
+    textAlign: "justify",
   },
 });
