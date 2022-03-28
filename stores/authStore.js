@@ -82,6 +82,51 @@ class AuthStore {
       console.log("OwnerStore -> fetchOwner -> error", error);
     }
   };
+  updateProfile = async (toast, navigation, editProfile) => {
+    try {
+      const formData = new FormData();
+      for (const key in editProfile) {
+        formData.append(key, editProfile[key]);
+      }
+      let res;
+      if (editProfile.picture === this.userOwner.picture) {
+        res = await instance.put("/users/editOwner", editProfile);
+      } else {
+        res = await instance.put("/users/editOwner", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+          transformRequest: (data, headers) => {
+            return formData;
+          },
+        });
+      }
+      this.userOwner = res.data;
+      navigation.navigate("Account");
+
+      toast.show({
+        description: "Updated Account",
+      });
+    } catch (error) {
+      console.log("AuthStore -> updateProfile -> error", error);
+    }
+  };
+  updateBio = async (toast, navigation, editProfileJC) => {
+    try {
+      const res = await instance.put("/users/editBio", editProfileJC);
+      // this.userOwner = res.data.owner;
+      if (this.userOwner.signUpAs === "Company") {
+        companyStore.updateCompany(res.data);
+      } else if (this.userOwner.signUpAs === "jobSeeker") {
+        jobSeekerStore.updateJobSeeker(res.data);
+      }
+      navigation.navigate("profile");
+
+      toast.show({
+        description: "Updated Bio",
+      });
+    } catch (error) {
+      console.log("AuthStore -> updateProfile -> error", error);
+    }
+  };
 
   // * signout method:
   signout = async (toast, navigation) => {

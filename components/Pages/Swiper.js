@@ -55,10 +55,10 @@ const Swiper = ({ navigation }) => {
 
       <Button
         onPress={() => {
-          navigation.navigate("EditProfile");
+          navigation.navigate("setting");
         }}
       >
-        Edit Profile
+        Setting
       </Button>
     </VStack>
   );

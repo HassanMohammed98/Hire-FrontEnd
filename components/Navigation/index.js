@@ -10,6 +10,10 @@ import SignIn from "../Pages/Auth/SignIn";
 import ResetPassword from "../Pages/Auth/ResetPassword";
 import RegisterCompany from "../Pages/Auth/RegisterCompany";
 import RegisterJobseeker from "../Pages/Auth/RegisterJobseeker";
+import Profile from "../Pages/Profile";
+import Setting from "../Pages/Setting";
+import Account from "../Pages/Account";
+import EditAccount from "../Pages/EditAccount";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -37,7 +41,11 @@ const RootNavigator = () => {
       <Screen name="ChatLogs" component={ChatLogs} />
       <Screen name="ChatHistory" component={ChatHistory} />
       <Screen name="Details" component={Details} />
+      <Screen name="Account" component={Account} />
+      <Screen name="EditAccount" component={EditAccount} />
+      <Screen name="profile" component={Profile} />
       <Screen name="EditProfile" component={EditProfile} />
+      <Screen name="setting" component={Setting} />
     </Navigator>
   );
 };

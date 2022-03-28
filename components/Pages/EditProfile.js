@@ -1,19 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Button, ScrollView, useToast, VStack } from "native-base";
+import React from "react";
+import { Input, Stack, Icon, useToast } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useState } from "react";
+import { TextInput } from "react-native-gesture-handler";
+import { observer } from "mobx-react";
 import authStore from "../../stores/authStore";
-import userStore from "../../stores/userStore";
+import AuthButtons from "../miniComponents/Buttons/AuthButtons";
 import jobSeekerStore from "../../stores/jobSeekerStore";
 import companyStore from "../../stores/companyStore";
-import { observer } from "mobx-react";
-import React, { useState } from "react";
-import { TextInput } from "react-native-gesture-handler";
 
 const EditProfile = ({ navigation }) => {
-  const toast = useToast();
-  const owner = authStore.userOwner;
-  const [editProfile, setEditProfile] = useState({});
-  const [editProfileJC, setEditProfileJC] = useState({});
-
+  //   const owner = authStore.userOwner;
+  //   const [editProfile, setEditProfile] = useState(owner);
   let userProfile;
   if (authStore.user && authStore.user.type === "Company") {
     userProfile = companyStore.companies.find(
@@ -25,235 +24,227 @@ const EditProfile = ({ navigation }) => {
       (jobSeeker) => jobSeeker.user === authStore.user._id
     );
   }
-  console.log("HassanTesting 55", owner);
-
-  // setEditProfile(userProfile);
+  const toast = useToast();
+  const [editProfileJC, setEditProfileJC] = useState(userProfile);
+  const save = () => {
+    authStore.updateBio(toast, navigation, editProfileJC);
+    // console.log(editProfileJC);
+  };
   return (
-    <ScrollView style={styles.layout}>
-      <Text>EditProfile</Text>
-      <VStack space={50}>
-        <VStack style={styles.owner}>
-          <Text>{owner.picture}</Text>
-          <Text>User Name: {owner.username}</Text>
-          <Text>NEW User Name: {editProfile.username}</Text>
-          <TextInput
-            style={styles.textInputName}
-            onChangeText={(username) =>
-              setEditProfile({ ...editProfile, username })
+    <Stack space={4} w="100%" alignItems="center">
+      {authStore.user && authStore.user.type === "Company" ? (
+        <View space={4} w="100%" alignItems="center">
+          <Input
+            w={{
+              base: "75%",
+              md: "25%",
+            }}
+            InputLeftElement={
+              <Icon
+                as={<MaterialIcons name="" />}
+                size={5}
+                ml="2"
+                color="muted.400"
+              />
             }
-            placeholder="username"
-          />
-          <Text>Password: {owner.password}</Text>
-          <Text>NEW Password: {editProfile.password}</Text>
-          <TextInput
-            style={styles.textInputName}
-            onChangeText={(password) =>
-              setEditProfile({ ...editProfile, password })
+            placeholder="Type"
+            onChangeText={(type) =>
+              setEditProfileJC({ ...editProfileJC, type })
             }
-            placeholder="Password"
           />
-          <Text>Email Adress: {owner.email}</Text>
-          <Text>NEW Email: {editProfile.email}</Text>
-          <TextInput
-            style={styles.textInputName}
-            onChangeText={(email) => setEditProfile({ ...editProfile, email })}
-            placeholder="Email Adress"
-          />
-          <Text>Search: {owner.search}</Text>
-          <Text>NEW Search: {editProfile.search}</Text>
-          <TextInput
-            style={styles.textInputName}
-            onChangeText={(search) =>
-              setEditProfile({ ...editProfile, search })
+          <Input
+            w={{
+              base: "75%",
+              md: "25%",
+            }}
+            InputRightElement={
+              <Icon
+                as={<MaterialIcons name="" />}
+                size={5}
+                mr="2"
+                color="muted.400"
+              />
             }
-            placeholder="Search"
-          />
-          <Text>Status {owner.status}</Text>
-          <Text>NEW status: {editProfile.status}</Text>
-          <TextInput
-            style={styles.textInputName}
-            onChangeText={(status) =>
-              setEditProfile({ ...editProfile, status })
+            placeholder="Founders"
+            onChangeText={(founders) =>
+              setEditProfileJC({ ...editProfileJC, founders })
             }
-            placeholder="Status"
           />
-          <Text>Languages: {owner.Languages}</Text>
-          <Text>NEW Languages: {editProfile.Languages}</Text>
-          <TextInput
-            style={styles.textInputName}
-            onChangeText={(Languages) =>
-              setEditProfile({ ...editProfile, Languages })
+          <Input
+            w={{
+              base: "75%",
+              md: "25%",
+            }}
+            InputLeftElement={
+              <Icon
+                as={<MaterialIcons name="" />}
+                size={5}
+                mr="2"
+                color="muted.400"
+              />
             }
-            placeholder="Languages"
+            placeholder="Year Established"
+            onChangeText={(yearEstablished) =>
+              setEditProfileJC({ ...editProfileJC, yearEstablished })
+            }
           />
-        </VStack>
-
-        {authStore.user && authStore.user.type === "Company" ? (
-          <VStack style={styles.owner}>
-            <Text>type: {userProfile.type}</Text>
-            <Text>NEW type: {editProfileJC.type}</Text>
-            <TextInput
-              style={styles.textInputName}
-              onChangeText={(type) =>
-                setEditProfileJC({ ...editProfileJC, type })
+          <Input
+            w={{
+              base: "75%",
+              md: "25%",
+            }}
+            InputLeftElement={
+              <Icon
+                as={<MaterialIcons name="" />}
+                size={5}
+                mr="2"
+                color="muted.400"
+              />
+            }
+            placeholder="Size"
+            onChangeText={(size) =>
+              setEditProfileJC({ ...editProfileJC, size })
+            }
+          />
+          <Input
+            w={{
+              base: "75%",
+              md: "25%",
+            }}
+            InputLeftElement={
+              <Icon
+                as={<MaterialIcons name="" />}
+                size={5}
+                mr="2"
+                color="muted.400"
+              />
+            }
+            placeholder="About"
+            onChangeText={(about) =>
+              setEditProfileJC({ ...editProfileJC, about })
+            }
+          />
+        </View>
+      ) : (
+        authStore.user &&
+        authStore.user.type === "JobSeeker" && (
+          <Stack space={4} w="100%" alignItems="center">
+            <Input
+              w={{
+                base: "75%",
+                md: "25%",
+              }}
+              InputLeftElement={
+                <Icon
+                  as={<MaterialIcons name="" />}
+                  size={5}
+                  mr="2"
+                  color="muted.400"
+                />
               }
-              placeholder="type"
-            />
-            <Text>founders: {userProfile.founders}</Text>
-            <Text>NEW founders: {editProfileJC.founders}</Text>
-            <TextInput
-              style={styles.textInputName}
-              onChangeText={(founders) =>
-                setEditProfileJC({ ...editProfileJC, founders })
+              placeholder="Firstname"
+              onChangeText={(firstname) =>
+                setEditProfileJC({ ...editProfileJC, firstname })
               }
-              placeholder="founders"
             />
-            <Text>yearEstablished: {userProfile.yearEstablished}</Text>
-            <Text>NEW yearEstablished: {editProfileJC.yearEstablished}</Text>
-            <TextInput
-              style={styles.textInputName}
-              onChangeText={(yearEstablished) =>
-                setEditProfileJC({ ...editProfileJC, yearEstablished })
+            <Input
+              w={{
+                base: "75%",
+                md: "25%",
+              }}
+              InputLeftElement={
+                <Icon
+                  as={<MaterialIcons name="" />}
+                  size={5}
+                  mr="2"
+                  color="muted.400"
+                />
               }
-              placeholder="yearEstablished"
-            />
-            <Text>size: {userProfile.size}</Text>
-            <Text>NEW size: {editProfileJC.size}</Text>
-            <TextInput
-              style={styles.textInputName}
-              onChangeText={(size) =>
-                setEditProfileJC({ ...editProfileJC, size })
+              placeholder="Lastname"
+              onChangeText={(lastname) =>
+                setEditProfileJC({ ...editProfileJC, lastname })
               }
-              placeholder="size"
             />
-            <Text>About: {userProfile.about}</Text>
-            <Text>NEW About: {editProfileJC.about}</Text>
-            <TextInput
-              style={styles.textInputName}
-              onChangeText={(about) =>
-                setEditProfileJC({ ...editProfileJC, about })
+            <Input
+              w={{
+                base: "75%",
+                md: "25%",
+              }}
+              InputLeftElement={
+                <Icon
+                  as={<MaterialIcons name="" />}
+                  size={5}
+                  mr="2"
+                  color="muted.400"
+                />
               }
-              placeholder="about"
+              placeholder="Education"
+              onChangeText={(education) =>
+                setEditProfileJC({ ...editProfileJC, education })
+              }
             />
-          </VStack>
-        ) : (
-          authStore.user &&
-          authStore.user.type === "JobSeeker" && (
-            <VStack style={styles.owner}>
-              <Text>prefix: {userProfile.prefix}</Text>
-              <Text>NEW prefix: {editProfileJC.prefix}</Text>
-              <TextInput
-                style={styles.textInputName}
-                onChangeText={(prefix) =>
-                  setEditProfileJC({ ...editProfileJC, prefix })
-                }
-                placeholder="prefix"
-              />
-              <Text>firstname: {userProfile.firstname}</Text>
-              <Text>NEW firstname: {editProfileJC.firstname}</Text>
-              <TextInput
-                style={styles.textInputName}
-                onChangeText={(firstname) =>
-                  setEditProfileJC({ ...editProfileJC, firstname })
-                }
-                placeholder="firstname"
-              />
-              <Text>lastname: {userProfile.lastname}</Text>
-              <Text>NEW lastname: {editProfileJC.lastname}</Text>
-              <TextInput
-                style={styles.textInputName}
-                onChangeText={(lastname) =>
-                  setEditProfileJC({ ...editProfileJC, lastname })
-                }
-                placeholder="lastname"
-              />
-              <Text>education: {userProfile.education}</Text>
-              <Text>NEW education: {editProfileJC.education}</Text>
-              <TextInput
-                style={styles.textInputName}
-                onChangeText={(education) =>
-                  setEditProfileJC({ ...editProfileJC, education })
-                }
-                placeholder="education"
-              />
-              <Text>experience: {userProfile.experience}</Text>
-              <Text>NEW experience: {editProfileJC.experience}</Text>
-              <TextInput
-                style={styles.textInputName}
-                onChangeText={(experience) =>
-                  setEditProfileJC({ ...editProfileJC, experience })
-                }
-                placeholder="experience"
-              />
-              <Text>skils: {userProfile.skils}</Text>
-              <Text>NEW skils: {editProfileJC.skils}</Text>
-              <TextInput
-                style={styles.textInputName}
-                onChangeText={(skils) =>
-                  setEditProfileJC({ ...editProfileJC, skils })
-                }
-                placeholder="skils"
-              />
-              <Text>phone: {userProfile.phone}</Text>
-              <Text>NEW phone: {editProfileJC.phone}</Text>
-              <TextInput
-                style={styles.textInputName}
-                onChangeText={(phone) =>
-                  setEditProfileJC({ ...editProfileJC, phone })
-                }
-                placeholder="phone"
-              />
-              <Text>gender: {userProfile.gender}</Text>
-              <Text>NEW gender: {editProfileJC.gender}</Text>
-              <TextInput
-                style={styles.textInputName}
-                onChangeText={(gender) =>
-                  setEditProfileJC({ ...editProfileJC, gender })
-                }
-                placeholder="phone"
-              />
-            </VStack>
-          )
-        )}
-      </VStack>
-
-      <Button
-        style={styles.button}
-        onPress={() => {
-          authStore.signout(toast, navigation);
-        }}
-      >
-        SIGN OUT
-      </Button>
-    </ScrollView>
+            <Input
+              w={{
+                base: "75%",
+                md: "25%",
+              }}
+              InputLeftElement={
+                <Icon
+                  as={<MaterialIcons name="" />}
+                  size={5}
+                  mr="2"
+                  color="muted.400"
+                />
+              }
+              placeholder="Experience"
+              onChangeText={(experience) =>
+                setEditProfileJC({ ...editProfileJC, experience })
+              }
+            />
+            <Input
+              w={{
+                base: "75%",
+                md: "25%",
+              }}
+              InputLeftElement={
+                <Icon
+                  as={<MaterialIcons name="" />}
+                  size={5}
+                  mr="2"
+                  color="muted.400"
+                />
+              }
+              placeholder="Skills"
+              onChangeText={(skils) =>
+                setEditProfileJC({ ...editProfileJC, skils })
+              }
+            />
+            <Input
+              w={{
+                base: "75%",
+                md: "25%",
+              }}
+              InputLeftElement={
+                <Icon
+                  as={<MaterialIcons name="" />}
+                  size={5}
+                  mr="2"
+                  color="muted.400"
+                />
+              }
+              placeholder="Phone"
+              onChangeText={(phone) =>
+                setEditProfileJC({ ...editProfileJC, phone })
+              }
+            />
+            <AuthButtons action={save} text={"SAVE"} Width={"80%"} />
+          </Stack>
+        )
+      )}
+    </Stack>
   );
 };
 
 export default observer(EditProfile);
 
-const styles = StyleSheet.create({
-  layout: {
-    height: 500,
-    display: "flex",
-    flex: 1,
-    // backgroundColor: "white",
-    flexDirection: "column",
-    // justifyContent: "space-evenly",
-  },
-
-  owner: {
-    marginTop: 50,
-    borderColor: "black",
-    borderWidth: 3,
-    paddingBottom: 50,
-  },
-
-  textInputName: {
-    borderBottomColor: "black",
-    borderBottomWidth: 1,
-    margin: 4,
-    padding: 4,
-    height: 32,
-  },
-  button: {},
-});
+const styles = StyleSheet.create({});

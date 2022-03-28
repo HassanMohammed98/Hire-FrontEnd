@@ -34,6 +34,11 @@ class CompanyStore {
       );
     }
   };
+  updateCompany = (updateCompany) => {
+    this.companies = this.companies.map((company) =>
+      company._id === updateCompany._id ? updateCompany : company
+    );
+  };
 }
 const companyStore = new CompanyStore();
 // companyStore.getCompanies();

@@ -19,7 +19,12 @@ class JobSeekerStore {
     }
   };
 
-  createJobSeeker = async (profile, navigation, toast) => {
+  updateJobSeeker = (updateJobSeeker) => {
+    this.jobSeekers = this.jobSeekers.map((jobSeeker) =>
+      jobSeeker._id === updateJobSeeker._id ? updateJobSeeker : jobSeeker
+    );
+  };
+createJobSeeker = async (profile, navigation, toast) => {
     try {
       const response = await instance.post("/jobseeker", profile);
       console.log(response.data);
