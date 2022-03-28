@@ -23,6 +23,9 @@ class AuthStore {
   // signup methods:
   signup = async (userData, toast, navigation) => {
     try {
+      userData.search = userData.search.join("\n");
+      userData.Languages = userData.Languages.join("\n");
+      console.log(userData);
       const formData = new FormData();
       for (const key in userData) {
         formData.append(key, userData[key]);
@@ -62,7 +65,11 @@ class AuthStore {
       //   });
       // }
     } catch (error) {
-      console.log(error);
+      if (error.message.includes("401")) {
+        toast.show({
+          description: "Check Username or Password",
+        });
+      }
     }
   };
 

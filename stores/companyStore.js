@@ -18,12 +18,15 @@ class CompanyStore {
     }
   };
 
-  createCompany = async (profile, navigation) => {
+  createCompany = async (profile, navigation, toast) => {
     try {
       const response = await instance.post("/company", profile);
       console.log(response.data);
       this.companies.push(response.data);
       navigation.navigate("Home");
+      toast.show({
+        description: "Account Setup Done",
+      });
     } catch (error) {
       console.log(
         "🚀 ~ file: companyStore.js ~ line 16 ~ CompanyStore ~ createCompany= ~ error",
