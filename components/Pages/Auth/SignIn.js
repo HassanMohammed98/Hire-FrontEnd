@@ -15,7 +15,21 @@ const SignIn = ({ navigation }) => {
   });
   const toast = useToast();
   const signin = () => {
-    authStore.signin(user, navigation, toast);
+    if (user.username.length > 1 && user.password.length > 1) {
+      authStore.signin(user, navigation, toast);
+    } else if (user.username.length === 0 && user.password.length === 0) {
+      toast.show({
+        description: "Username & Password Missing",
+      });
+    } else if (user.username.length === 0) {
+      toast.show({
+        description: "Username Missing",
+      });
+    } else {
+      toast.show({
+        description: "Password Missing",
+      });
+    }
   };
   return (
     <View style={styles.screen}>
@@ -38,6 +52,7 @@ const SignIn = ({ navigation }) => {
                 style={styles.textInputName}
                 onChangeText={(password) => setUser({ ...user, password })}
                 placeholder="Password"
+                // secureTextEntry={true}
               />
             </VStack>
             <View style={styles.forgot}>

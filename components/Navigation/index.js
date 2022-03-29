@@ -14,6 +14,8 @@ import Profile from "../Pages/Profile";
 import Setting from "../Pages/Setting";
 import Account from "../Pages/Account";
 import EditAccount from "../Pages/EditAccount";
+import ScreenHeader from "../miniComponents/Header/ScreenHeader";
+import RegularHeader from "../miniComponents/Header/RegularHeader";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -46,6 +48,8 @@ const RootNavigator = () => {
       <Screen name="profile" component={Profile} />
       <Screen name="EditProfile" component={EditProfile} />
       <Screen name="setting" component={Setting} />
+      <Screen name="majd" component={ScreenHeader} />
+      <Screen name="regularHeader" component={RegularHeader} />
     </Navigator>
   );
 };

@@ -18,17 +18,21 @@ class JobSeekerStore {
       console.log("jobSeekerStore -> fetchJobSeeker -> error", error);
     }
   };
+
   updateJobSeeker = (updateJobSeeker) => {
     this.jobSeekers = this.jobSeekers.map((jobSeeker) =>
       jobSeeker._id === updateJobSeeker._id ? updateJobSeeker : jobSeeker
     );
   };
-  createJobSeeker = async (profile, navigation) => {
+createJobSeeker = async (profile, navigation, toast) => {
     try {
       const response = await instance.post("/jobseeker", profile);
       console.log(response.data);
       this.jobSeekers.push(response.data);
       navigation.navigate("Home");
+      toast.show({
+        description: "Account Setup Done",
+      });
     } catch (error) {
       console.log(
         "🚀 ~ file: companyStore.js ~ line 16 ~ CompanyStore ~ createCompany= ~ error",

@@ -13,8 +13,12 @@ import userStore from "../../stores/userStore";
 import companyStore from "../../stores/companyStore";
 import jobSeekerStore from "../../stores/jobSeekerStore";
 import { observer } from "mobx-react";
+
 import { Ionicons, Entypo, AntDesign } from "@expo/vector-icons";
 import { baseURL } from "../../stores/instance";
+
+import ScreenHeader from "../miniComponents/Header/ScreenHeader";
+
 
 const Swiper = ({ navigation, viewUser, details }) => {
   const owner = authStore.userOwner;
@@ -48,6 +52,7 @@ const Swiper = ({ navigation, viewUser, details }) => {
   // console.log(userStore.users);
   // console.log(companyStore);
   return (
+
     <SafeAreaView style={styles.screen}>
       <View style={styles.headermain}>
         <TouchableOpacity style={styles.SLogo}>
@@ -83,6 +88,49 @@ const Swiper = ({ navigation, viewUser, details }) => {
         </View>
       </View>
     </SafeAreaView>
+
+                
+                
+                
+//     <VStack space={6} style={styles.layout}>
+//       <ScreenHeader />
+//       <Text>Swiper</Text>
+//       {authStore.user && <Text>{authStore.user.username}</Text>}
+//       {authStore.user && <Text>{authStore.user.type}</Text>}
+
+//       {/* <Text>{userStore.users[0].signUpAs}</Text> */}
+//       <ScrollView style={styles.view}>{filteredUser}</ScrollView>
+//       <Button
+//         onPress={() => {
+//           // navigation.navigate("TripDetail", { trip: trip });
+//           navigation.navigate("ChatLogs");
+//         }}
+//       >
+//         View Chat Log
+//       </Button>
+//       <Button
+//         onPress={() => {
+//           navigation.navigate("majd");
+//         }}
+//       >
+//         Header Majd
+//       </Button>
+//       <Button
+//         onPress={() => {
+//           navigation.navigate("regularHeader");
+//         }}
+//       >
+//         Regular Header
+//       </Button>
+//       <Button
+//         onPress={() => {
+//           navigation.navigate("setting");
+//         }}
+//       >
+//         Setting
+//       </Button>
+//     </VStack>
+
   );
 };
 
