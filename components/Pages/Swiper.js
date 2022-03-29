@@ -6,6 +6,7 @@ import userStore from "../../stores/userStore";
 import companyStore from "../../stores/companyStore";
 import jobSeekerStore from "../../stores/jobSeekerStore";
 import { observer } from "mobx-react";
+import ScreenHeader from "../miniComponents/Header/ScreenHeader";
 
 const Swiper = ({ navigation }) => {
   let filteredUser;
@@ -38,6 +39,7 @@ const Swiper = ({ navigation }) => {
   // console.log(companyStore);
   return (
     <VStack space={6} style={styles.layout}>
+      <ScreenHeader />
       <Text>Swiper</Text>
       {authStore.user && <Text>{authStore.user.username}</Text>}
       {authStore.user && <Text>{authStore.user.type}</Text>}
@@ -52,7 +54,14 @@ const Swiper = ({ navigation }) => {
       >
         View Chat Log
       </Button>
-
+      <Button
+        onPress={() => {
+          // navigation.navigate("TripDetail", { trip: trip });
+          navigation.navigate("majd");
+        }}
+      >
+        Header Majd
+      </Button>
       <Button
         onPress={() => {
           navigation.navigate("setting");
