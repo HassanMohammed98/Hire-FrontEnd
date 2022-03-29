@@ -56,7 +56,7 @@ const Registration = ({ navigation }) => {
           navigation={navigation}
           screen={"SignIn"}
           // params={{ type: "JobSeeker" }}
-          text={"SIGN IN Here"}
+          text={"SIGN IN"}
           Width={"27.57%"}
         />
       </VStack>
