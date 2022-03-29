@@ -14,6 +14,7 @@ class AuthStore {
   user = null;
 
   userOwner = null;
+  ownerChats = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -58,6 +59,7 @@ class AuthStore {
       // if (res.data.token) {
       await this.setUser(res.data.token, navigation, toast, reg);
       await this.getOwner();
+      // await this.getOwnerChats();
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
       // } else {
       //   toast.show({
@@ -80,6 +82,15 @@ class AuthStore {
       // console.log(response.data);
     } catch (error) {
       console.log("OwnerStore -> fetchOwner -> error", error);
+    }
+  };
+  getOwnerChats = async () => {
+    try {
+      const response = await instance.get("/chats/fetchOwnerChats");
+      this.ownerChats = response.data;
+      console.log("cc", response.data);
+    } catch (error) {
+      console.log("UsersStore -> fetchUsers -> error", error);
     }
   };
   updateProfile = async (toast, navigation, editProfile) => {

@@ -16,7 +16,7 @@ class UserStore {
       this.users = response.data;
       // console.log(response.data);
     } catch (error) {
-      console.log("UsersStore -> fetchUsers -> error", error);
+      console.log("UsersStore -> fetchUsersCorrect -> error", error);
     }
   };
 }
