@@ -56,11 +56,17 @@ const Swiper = ({ navigation }) => {
       </Button>
       <Button
         onPress={() => {
-          // navigation.navigate("TripDetail", { trip: trip });
           navigation.navigate("majd");
         }}
       >
         Header Majd
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.navigate("regularHeader");
+        }}
+      >
+        Regular Header
       </Button>
       <Button
         onPress={() => {
