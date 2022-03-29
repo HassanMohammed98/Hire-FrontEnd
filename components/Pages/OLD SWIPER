@@ -1,0 +1,42 @@
+// <View>
+//   <TouchableOpacity>
+//     <Image
+//       style={tw("h-10 w-10")}
+//       source={{ uri: baseURL + filteredUser.picture }}
+//     />
+//   </TouchableOpacity>
+// </View>
+// {/* <ScrollView style={styles.view}>{filteredUser}</ScrollView> */}
+// {/* <HStack space={20}>
+//   <Button
+//     onPress={() => {
+//       // navigation.navigate("TripDetail", { trip: trip });
+//       navigation.navigate("ChatLogs");
+//     }}
+//   >
+//     View Chat Log
+//   </Button>
+
+//   <Button
+//     onPress={() => {
+//       navigation.navigate("setting");
+//     }}
+//   >
+//     Setting
+//   </Button>
+// </HStack> */}
+// <VStack style={styles.layout}>
+//   {/* <Text>Swiper</Text>
+// {authStore.user && <Text>{authStore.user.username}</Text>}
+// {authStore.user && <Text>{authStore.user.type}</Text>} */}
+
+//   {/* <Text>{userStore.users[0].signUpAs}</Text> */}
+//   <HStack style={styles.viewb}>
+//     <View style={styles.skip}>
+//       <Ionicons name="close-outline" size={50} />
+//     </View>
+//     <View style={styles.accept}>
+//       <Ionicons name="checkmark" size={50} />
+//     </View>
+//   </HStack>
+// </VStack>
