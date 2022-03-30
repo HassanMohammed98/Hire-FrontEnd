@@ -20,6 +20,10 @@ const ChatHistory = ({ navigation, route }) => {
       console.log("message box empty");
     }
   };
+  console.log(
+    "==--=-=-=-=-=-=-=-=-==",
+    chat.messages[chat.messages.length - 1]
+  );
   // const messagesEndRef = useRef(null);
   // useEffect(() => {
   //   messagesEndRef.scrollTo({
@@ -78,11 +82,41 @@ const ChatHistory = ({ navigation, route }) => {
 
   if (ChatHistory.length === 0) {
     return (
-      <View style={styles.screenEmpty}>
-        <Text style={{ fontFamily: "Righteous_400Regular", fontSize: 15 }}>
-          No Messages found
-        </Text>
-      </View>
+      <VStack style={styles.screenEmpty}>
+        <View style={styles.screenEmpty}>
+          <Text style={{ fontFamily: "Righteous_400Regular", fontSize: 15 }}>
+            No Messages found
+          </Text>
+        </View>
+        <HStack style={styles.chatBox}>
+          <TextInput
+            style={{ flex: 0.98 }}
+            // secureTextEntry={true}
+            onChangeText={(newMessage) => {
+              return setMessage(newMessage);
+            }}
+            placeholder="Messages"
+          />
+
+          <MaterialIcons
+            name="send"
+            size={25}
+            onPress={() => handleMessage()}
+            style={{
+              backgroundColor: "rgba(48, 71, 94,0.7)",
+              // borderWidth: 1,
+              padding: 7,
+              paddingLeft: 8.5,
+              borderRadius: 70,
+              height: "100%",
+              aspectRatio: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            color="rgb(245, 245, 245)"
+          />
+        </HStack>
+      </VStack>
     );
   } else {
     return (
@@ -131,8 +165,8 @@ const styles = StyleSheet.create({
   screenEmpty: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "white",
+    alignItems: "center",
   },
   screen: {
     flex: 1,
