@@ -39,7 +39,7 @@ const Account = ({ navigation }) => {
 
   // setEditProfile(userProfile);
   return (
-    <VStack space={8}>
+    <VStack space={8} style={styles.main}>
       {/* <Image
         style={{
           height: 90,
@@ -52,19 +52,20 @@ const Account = ({ navigation }) => {
         }}
         source={{ uri: baseURL + owner.picture }}
       /> */}
-      <AddViewImage user={editProfile} setUser={setEditProfile} />
-      <Text style={styles.userName}>User Name: {owner.username}</Text>
-      <Text style={styles.userName}>Email Adress: {owner.email}</Text>
-      {/* <Text style={styles.userName}>Search: {owner.search}</Text> */}
-      <Text style={styles.userName}>Languages: {owner.Languages}</Text>
-      <AuthButtons
-        action={() => {
-          navigation.navigate("EditAccount");
-        }}
-        text={"Edit"}
-        Width={"80%"}
-      />
-      {/* <Button
+      <View style={styles.data}>
+        <AddViewImage user={editProfile} setUser={setEditProfile} />
+        <Text style={styles.userName}>User Name: {owner.username}</Text>
+        <Text style={styles.userName}>Email Adress: {owner.email}</Text>
+        {/* <Text style={styles.userName}>Search: {owner.search}</Text> */}
+        <Text style={styles.userName}>Languages: {owner.Languages}</Text>
+        <AuthButtons
+          action={() => {
+            navigation.navigate("EditAccount");
+          }}
+          text={"Edit"}
+          Width={"80%"}
+        />
+        {/* <Button
         style={styles.button}
         onPress={() => {
           authStore.signout(toast, navigation);
@@ -72,6 +73,7 @@ const Account = ({ navigation }) => {
       >
         SIGN OUT
       </Button> */}
+      </View>
     </VStack>
   );
 };
@@ -89,17 +91,16 @@ const styles = StyleSheet.create({
   },
 
   userName: {
+    marginTop: 30,
     height: 50,
 
     flexDirection: "row",
     paddingHorizontal: 15,
-    borderWidth: 0.5,
-    borderRadius: 5,
+
     textAlign: "center",
     fontSize: 18,
     paddingVertical: 10,
     marginHorizontal: 30,
-    backgroundColor: "white",
   },
 
   owner: {
@@ -117,4 +118,10 @@ const styles = StyleSheet.create({
     height: 32,
   },
   button: {},
+  main: {
+    flex: 1,
+  },
+  data: {
+    marginTop: 50,
+  },
 });

@@ -23,7 +23,7 @@ const Profile = ({ navigation }) => {
     );
   }
   return (
-    <VStack space={8}>
+    <VStack space={8} style={styles.main}>
       {authStore.user && authStore.user.type === "Company" ? (
         <VStack space={8} style={styles.owner}>
           <Text style={styles.userName}>type: {userProfile.type}</Text>
@@ -180,12 +180,16 @@ const styles = StyleSheet.create({
 
     flexDirection: "row",
     paddingHorizontal: 15,
-    borderWidth: 0.5,
-    borderRadius: 5,
+
     textAlign: "center",
     fontSize: 18,
     paddingVertical: 10,
     marginHorizontal: 30,
-    backgroundColor: "white",
+  },
+  main: { flex: 1 },
+  owner: {
+    marginTop: 60,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
