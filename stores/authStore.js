@@ -45,7 +45,6 @@ class AuthStore {
       });
       const reg = "signup";
       await this.setUser(res.data.token, navigation, toast, reg);
-      await this.getOwner();
       console.log("AuthStore -> signup -> res.data.token", res.data.token);
     } catch (error) {
       console.log(error);
@@ -59,7 +58,6 @@ class AuthStore {
       const reg = "signin";
       // if (res.data.token) {
       await this.setUser(res.data.token, navigation, toast, reg);
-      await this.getOwner(); // await this.getOwnerChats();
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
       // } else {
       //   toast.show({
@@ -158,6 +156,7 @@ class AuthStore {
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
     console.log(this.user);
+    await this.getOwner(); // await this.getOwnerChats();
     await companyStore.getCompanies();
     await jobSeekerStore.getJobSeekers();
     await userStore.getUsers();

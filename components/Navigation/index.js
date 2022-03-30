@@ -40,14 +40,22 @@ const RootNavigator = () => {
       />
       <Screen name="RegisterJobseeker" component={RegisterJobseeker} />
       <Screen name="Home" component={Swiper} options={{ headerShown: false }} />
-      <Screen name="ChatLogs" component={ChatLogs} />
+      <Screen
+        name="ChatLogs"
+        component={ChatLogs}
+        options={{ headerShown: false }}
+      />
       <Screen name="ChatHistory" component={ChatHistory} />
       <Screen name="Details" component={Details} />
       <Screen name="Account" component={Account} />
       <Screen name="EditAccount" component={EditAccount} />
       <Screen name="profile" component={Profile} />
       <Screen name="EditProfile" component={EditProfile} />
-      <Screen name="setting" component={Setting} />
+      <Screen
+        name="setting"
+        component={Setting}
+        options={{ headerShown: false }}
+      />
       <Screen name="majd" component={ScreenHeader} />
       <Screen name="regularHeader" component={RegularHeader} />
     </Navigator>

@@ -4,7 +4,7 @@ import authStore from "./authStore";
 import messageStore from "./chatStore";
 import userStore from "./userStore";
 
-export const baseURL = "http://192.168.1.199:8000";
+export const baseURL = "http://192.168.166.114:8000";
 export const socket = io(baseURL);
 socket.on("chat", async function (msg) {
   console.log(
@@ -15,7 +15,6 @@ socket.on("chat", async function (msg) {
   await userStore.getUsers();
   await messageStore.getMessages();
 });
-
 
 export const instance = axios.create({
   baseURL: `${baseURL}/api`,
