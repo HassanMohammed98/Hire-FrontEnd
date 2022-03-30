@@ -6,6 +6,7 @@ import userStore from "../../stores/userStore";
 import companyStore from "../../stores/companyStore";
 import jobSeekerStore from "../../stores/jobSeekerStore";
 import { observer } from "mobx-react";
+import messageStore from "../../stores/chatStore";
 
 const Swiper = ({ navigation }) => {
   let filteredUser;
@@ -45,8 +46,10 @@ const Swiper = ({ navigation }) => {
       {/* <Text>{userStore.users[0].signUpAs}</Text> */}
       <ScrollView style={styles.view}>{filteredUser}</ScrollView>
       <Button
-        onPress={() => {
+        onPress={async () => {
           // navigation.navigate("TripDetail", { trip: trip });
+
+          await messageStore.getMessages();
           navigation.navigate("ChatLogs");
         }}
       >

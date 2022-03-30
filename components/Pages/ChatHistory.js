@@ -1,97 +1,74 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import authStore from "../../stores/authStore";
 import messageStore from "../../stores/chatStore";
 import { HStack, ScrollView, VStack } from "native-base";
 import { TextInput } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
+import ChatBubble from "../miniComponents/chat/ChatBubble";
+import { socket } from "../../stores/instance";
+import { observer } from "mobx-react";
 
 const ChatHistory = ({ navigation, route }) => {
   const { chat } = route.params;
   const [message, setMessage] = useState("");
   const handleMessage = () => {
-    // console.log(message);
-    // createMessage();
     if (message.length > 1) {
       messageStore.createMessage({ chat: chat._id, message: message });
+      socket.emit("backendChat", "hi");
     } else {
       console.log("message box empty");
     }
   };
+  // const messagesEndRef = useRef(null);
+  // useEffect(() => {
+  //   messagesEndRef.scrollTo({
+  //     x: 0,
+  //     y: 300,
+  //     animated: true,
+  //   });
+  //   console.log("hello");
+  // }, [messageStore.messages]);
   const ChatHistory = messageStore.messages
     .filter((message) => message.chat === chat._id)
     .map((singleMessage) => {
       if (singleMessage.sender !== authStore.userOwner._id) {
-        console.log(singleMessage);
         return (
-          <HStack
-            w={"100%"}
+          <View
             key={singleMessage._id}
             style={{
-              borderWidth: 1,
-              borderColor: "green",
-              // height: 120,
-              paddingLeft: 10,
-              paddingVertical: 10,
+              alignItems: "flex-start",
+              marginVertical: 7,
+              marginHorizontal: 7,
             }}
           >
-            <VStack h={"100%"}>
-              <View
-                style={{
-                  // flex: 0.4,
-                  padding: 10,
-                  paddingLeft: 15,
-                  paddingRight: 20,
-                  borderRadius: 19,
-                  minHeight: 95,
-                  width: 160,
-                  backgroundColor: "#F5F5F5",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={styles.message}>{singleMessage.message}</Text>
-              </View>
-              <Text style={{}}>{singleMessage.updatedAt}</Text>
-            </VStack>
-          </HStack>
+            <ChatBubble
+              align={"flex-start"}
+              text={"black"}
+              color={"#F5F5F5"}
+              message={singleMessage.message}
+              updatedAt={singleMessage.updatedAt}
+            />
+          </View>
         );
-        //   </HStack>
       } else {
         return (
-          <HStack
-            w={"100%"}
+          <View
             key={singleMessage._id}
             style={{
-              borderWidth: 1,
-              borderColor: "green",
               alignItems: "flex-end",
-              justifyContent: "flex-end",
-              paddingRight: 10,
-              paddingVertical: 10,
+              marginVertical: 7,
+              marginHorizontal: 7,
             }}
           >
-            <VStack h={"100%"}>
-              <View
-                style={{
-                  // flex: 0.4,
-
-                  padding: 10,
-                  paddingLeft: 15,
-                  paddingRight: 20,
-                  borderRadius: 19,
-                  minHeight: 95,
-                  width: 160,
-                  backgroundColor: "rgba(48, 71, 94,0.7)",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={styles.messageOwner}>{singleMessage.message}</Text>
-              </View>
-              <Text style={{ fontSize: 12 }}>{singleMessage.updatedAt}</Text>
-            </VStack>
-          </HStack>
+            <ChatBubble
+              align={"flex-end"}
+              text={"#F5F5F5"}
+              color={"rgba(48, 71, 94,0.7)"}
+              message={singleMessage.message}
+              updatedAt={singleMessage.updatedAt}
+            />
+          </View>
         );
       }
     });
@@ -110,22 +87,14 @@ const ChatHistory = ({ navigation, route }) => {
   } else {
     return (
       <VStack style={styles.screen}>
-        <ScrollView style={{ borderWidth: 2 }}>
+        <ScrollView style={{ flex: 1, width: "100%" }}>
           {/* <Text>ChatHistoryfff</Text> */}
           {ChatHistory ? ChatHistory : <Text>No messages Found</Text>}
+          {/* <View style={{ height: 5 }} ref={messagesEndRef}></View> */}
         </ScrollView>
-        {/* <View
-          style={{
-            width: "91.355%",
-            height: 50,
-            backgroundColor: "red",
-            marginVertical: 15,
-            borderRadius: 30,
-          }}
-        ></View> */}
         <HStack style={styles.chatBox}>
           <TextInput
-            style={{ flex: 0.98, borderWidth: 2 }}
+            style={{ flex: 0.98 }}
             // secureTextEntry={true}
             onChangeText={(newMessage) => {
               return setMessage(newMessage);
@@ -156,7 +125,7 @@ const ChatHistory = ({ navigation, route }) => {
   }
 };
 
-export default ChatHistory;
+export default observer(ChatHistory);
 
 const styles = StyleSheet.create({
   screenEmpty: {
