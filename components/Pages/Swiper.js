@@ -76,15 +76,16 @@ const Swiper = ({ navigation, viewUser, details }) => {
 
     <SafeAreaView style={styles.screen}>
       <ScreenHeader navigation={navigation} owner={owner} />
+      {filteredUser[0]}
 
       <View style={styles.cardContainer}>
-        <View style={styles.cardb}>
+        {/* <View style={styles.cardb}>
           <Image
             style={styles.cardImage}
             source={{ uri: baseURL + owner.picture }}
           />
           <Text>{filteredUser[1]}</Text>
-        </View>
+        </View> */}
         <View style={styles.buttonContainer}>
           <HStack style={styles.HStackbutton}>
             <TouchableOpacity style={styles.cross}>
