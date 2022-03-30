@@ -4,6 +4,7 @@ import AuthButtons from "../../miniComponents/Buttons/AuthButtons";
 import React from "react";
 import SignInDiv from "../../miniComponents/SVG/SignInDiv";
 import Logo from "../../miniComponents/SVG/Logo";
+import { socket } from "../../../stores/instance";
 
 const Registration = ({ navigation }) => {
   return (

@@ -4,14 +4,17 @@ import authStore from "../../stores/authStore";
 import { Center, HStack, Image, Pressable, VStack } from "native-base";
 import userStore from "../../stores/userStore";
 import { baseURL } from "../../stores/instance";
+import { observer } from "mobx-react";
 
 const ChatLogs = ({ navigation }) => {
   // console.log("all Saad chats", authStore.ownerChats);
   const chats = authStore.userOwner.chats.map((chat) => {
     if (authStore.userOwner.signUpAs === "JobSeeker") {
-      const otherEnd = userStore.users.find(
-        (user) => user._id === chat.companyID
-      );
+      console.log("+++++++++++++++++++", userStore.users);
+      const otherEnd = userStore.users.find((user) => {
+        console.log("===============>", user._id, chat.companyID);
+        return user._id === chat.companyID;
+      });
       // console.log("all users hassan test", userStore.users);
       // console.log("chat detail", chat);
       console.log(otherEnd);
@@ -153,7 +156,7 @@ const ChatLogs = ({ navigation }) => {
   }
 };
 
-export default ChatLogs;
+export default observer(ChatLogs);
 
 const styles = StyleSheet.create({
   screen: {

@@ -13,6 +13,7 @@ import userStore from "../../stores/userStore";
 import companyStore from "../../stores/companyStore";
 import jobSeekerStore from "../../stores/jobSeekerStore";
 import { observer } from "mobx-react";
+import messageStore from "../../stores/chatStore";
 
 import { Ionicons, Entypo, AntDesign } from "@expo/vector-icons";
 import { baseURL } from "../../stores/instance";
@@ -52,6 +53,34 @@ const Swiper = ({ navigation, viewUser, details }) => {
   // console.log(userStore.users);
   // console.log(companyStore);
   return (
+
+//     <VStack space={6} style={styles.layout}>
+//       <Text>Swiper</Text>
+//       {authStore.user && <Text>{authStore.user.username}</Text>}
+//       {authStore.user && <Text>{authStore.user.type}</Text>}
+
+//       {/* <Text>{userStore.users[0].signUpAs}</Text> */}
+//       <ScrollView style={styles.view}>{filteredUser}</ScrollView>
+//       <Button
+//         onPress={async () => {
+//           // navigation.navigate("TripDetail", { trip: trip });
+
+//           await messageStore.getMessages();
+//           navigation.navigate("ChatLogs");
+//         }}
+//       >
+//         View Chat Log
+//       </Button>
+
+//       <Button
+//         onPress={() => {
+//           navigation.navigate("setting");
+//         }}
+//       >
+//         Setting
+//       </Button>
+//     </VStack>
+
 
     <SafeAreaView style={styles.screen}>
       <View style={styles.headermain}>
@@ -130,6 +159,7 @@ const Swiper = ({ navigation, viewUser, details }) => {
 //         Setting
 //       </Button>
 //     </VStack>
+
 
   );
 };

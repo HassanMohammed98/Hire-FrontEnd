@@ -6,6 +6,7 @@ import decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import companyStore from "./companyStore";
 import jobSeekerStore from "./jobSeekerStore";
+import userStore from "./userStore";
 
 //! make sure of the code ::
 // make auth store - sign up - sign in:
@@ -58,8 +59,7 @@ class AuthStore {
       const reg = "signin";
       // if (res.data.token) {
       await this.setUser(res.data.token, navigation, toast, reg);
-      await this.getOwner();
-      // await this.getOwnerChats();
+      await this.getOwner(); // await this.getOwnerChats();
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
       // } else {
       //   toast.show({
@@ -160,6 +160,7 @@ class AuthStore {
     console.log(this.user);
     await companyStore.getCompanies();
     await jobSeekerStore.getJobSeekers();
+    await userStore.getUsers();
     if (reg === "signin") {
       navigation.navigate("Home");
     }
