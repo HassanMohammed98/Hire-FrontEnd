@@ -16,6 +16,7 @@ socket.on("chat", async function (msg) {
   await messageStore.getMessages();
 });
 
+
 export const instance = axios.create({
   baseURL: `${baseURL}/api`,
 });

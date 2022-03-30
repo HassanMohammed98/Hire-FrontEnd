@@ -5,56 +5,43 @@ import { baseURL } from "../../stores/instance";
 
 const ViewJobSeeker = ({ viewUser, details }) => {
   return (
-    <ScrollView space={1} style={styles.detailsPage}>
+    <ScrollView space={1} style={styles.parentPage}>
       <HStack style={styles.headerLayout} h={70} w={"100%"}>
         {/* <Text> {viewUser.picture} </Text> */}
-        {
-          viewUser.picture.length > 1 ? (
-            <Image
-              style={{
-                height: "100%",
-                aspectRatio: 1,
-                zIndex: -1,
-                borderRadius: 100,
-                // borderColor: "black",
-                // borderWidth: 3,
-              }}
-              alt="Profile Image"
-              source={{ uri: baseURL + viewUser.picture }}
-            />
-          ) : (
-            // <CompanyProfile height={166} />
-            // <Image
-            //   style={{
-            //     height: 50,
-            //     aspectRatio: 1,
-            //     zIndex: -1,
-            //     borderRadius: 100,
-            //     // borderColor: "black",
-            //     // borderWidth: 3,
-            //   }}
-            //   alt="JobSeeker Profile Image"
-            //   source={require("../../assets/userProfile.png")}
-            // />
-            // <UserProfile height={2} />
-            // <Text>Hello world</Text>
-            <Image
-              style={{
-                width: "22%",
-                aspectRatio: 1,
-              }}
-              alt="JobSeeker Profile Image"
-              source={require("../../assets/userProfile.png")}
-            />
-          )
-          // ) : (
-          //   user.signUpAs === "JobSeeker" && <UserProfile height={165} />
-        }
+        {viewUser.picture.length > 1 ? (
+          <Image
+            style={{
+              height: "100%",
+              aspectRatio: 1,
+              zIndex: -1,
+              borderRadius: 100,
+              // borderColor: "black",
+              // borderWidth: 3,
+            }}
+            alt="Profile Image"
+            source={{ uri: baseURL + viewUser.picture }}
+          />
+        ) : (
+          <Image
+            style={{
+              width: "22%",
+              aspectRatio: 1,
+            }}
+            alt="JobSeeker Profile Image"
+            source={require("../../assets/userProfile.png")}
+          />
+        )}
         <VStack w={"100%"} h={"60%"} style={styles.header}>
           <HStack>
-            {details.prefix.length > 1 && <Text>{details.prefix} </Text>}
-            {details.firstname.length > 1 && <Text>{details.firstname}</Text>}
-            {details.lastname.length > 1 && <Text> {details.lastname} </Text>}
+            {details.prefix.length > 1 && (
+              <Text style={styles.candidateName}>{details.prefix} </Text>
+            )}
+            {details.firstname.length > 1 && (
+              <Text style={styles.candidateName}>{details.firstname}</Text>
+            )}
+            {details.lastname.length > 1 && (
+              <Text style={styles.candidateName}> {details.lastname} </Text>
+            )}
           </HStack>
           {details.skils.length > 1 && <Text>{details.skils}</Text>}
           {details.gender.length > 1 && <Text>{details.gender}</Text>}
@@ -71,8 +58,14 @@ const ViewJobSeeker = ({ viewUser, details }) => {
       {/* {details.education.length > 0 && ( */}
       <VStack w={"100%"} style={styles.bodyTwo} space={2}>
         <Text style={styles.aboutHeader}>Education</Text>
-        <Text>Regis University: DBA in Business Administration</Text>
-        <Text>CODED: Fullstack Bootcamp</Text>
+        <Text style={styles.educationHeader}>Regis University</Text>
+        <Text style={styles.educationbody}>
+          DBA in Business Administration{" "}
+        </Text>
+        <Text style={styles.educationHeader}>CODED Academy</Text>
+        <Text style={styles.educationbody}>
+          Fullstack Bootcamp HTML, CSS, Javascript
+        </Text>
       </VStack>
       {/* // )} */}
       {/* {details.experience.length > 0 && ( */}
@@ -181,6 +174,7 @@ const styles = StyleSheet.create({
   aboutHeaderBlack: {
     fontSize: 15,
     textAlign: "center",
+    color: "grey",
   },
   bodyTwo: {
     // borderColor: "black",
@@ -201,7 +195,7 @@ const styles = StyleSheet.create({
     padding: 15,
     paddingLeft: 50,
   },
-  detailsPage: {
+  parentPage: {
     flex: 1,
     backgroundColor: "white",
     // borderWidth: 1,
@@ -230,5 +224,15 @@ const styles = StyleSheet.create({
   },
   positionBody: {
     textAlign: "justify",
+    color: "grey",
+  },
+  candidateName: {
+    fontWeight: "bold",
+  },
+  educationHeader: {
+    fontWeight: "bold",
+  },
+  educationbody: {
+    color: "grey",
   },
 });
