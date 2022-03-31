@@ -34,6 +34,24 @@ class MessageStore {
       );
     }
   };
+  createChat = async (Chat, toast) => {
+    try {
+      // console.log(Chat);
+      const response = await instance.post("/chats", Chat);
+      console.log(response.data);
+
+      // this.messages.push(response.data);
+      //   navigation.navigate("Home");
+      toast.show({
+        description: "Matched.. Start Chatting",
+      });
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: companyStore.js ~ line 16 ~ CompanyStore ~ createCompany= ~ error",
+        error
+      );
+    }
+  };
 }
 const messageStore = new MessageStore();
 messageStore.getMessages();

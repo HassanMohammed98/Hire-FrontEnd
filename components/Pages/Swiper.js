@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Button, HStack, ScrollView, VStack } from "native-base";
+import { Button, HStack, ScrollView, useToast, VStack } from "native-base";
 import React, { useEffect, useRef } from "react";
 import authStore from "../../stores/authStore";
 import userStore from "../../stores/userStore";
@@ -15,24 +15,31 @@ import { baseURL } from "../../stores/instance";
 
 import ScreenHeader from "../miniComponents/Header/ScreenHeader";
 const SwiperScreen = ({ navigation }) => {
+  const toast = useToast();
   const owner = authStore.userOwner;
   const swipeRef = useRef(null);
   let filteredUser;
   const swipeLeft = async (cardIndex) => {
-    // filteredUser[cardIndex]._id;
-    // console.log("Swiped pass", filteredUser[0]);
     const test = filteredUser[cardIndex].user;
-    const viewUserSend = userStore.users.find((user) => user._id === test);
-    console.log("Swiped pass", viewUserSend);
-    // console.log("Swiped pass hellooo", filteredUser[cardIndex]._id);
+    console.log("Swiped pass", test);
   };
   const swipeRight = async (cardIndex) => {
-    const test = filteredUser[cardIndex]._id;
-    const viewUserSendright = userStore.users.find((user) => user._id === test);
-    console.log("Swiped pass", viewUserSendright);
+    const test = filteredUser[cardIndex].user;
     // console.log("Swiped Hire", test);
-    const chat = {};
-    // console.log("Swiped hire hellooo", filteredUser[cardIndex]._id);
+    let chat;
+    if (authStore.userOwner.signUpAs === "JobSeeker") {
+      chat = {
+        companyID: test,
+        jobSeekerID: authStore.userOwner._id,
+      };
+    } else if (authStore.userOwner.signUpAs === "Company") {
+      chat = {
+        companyID: authStore.userOwner._id,
+        jobSeekerID: test,
+      };
+    }
+
+    await messageStore.createChat(chat, toast);
   };
   if (authStore.user && authStore.user.type === "Company") {
     filteredUser = jobSeekerStore.jobSeekers;
