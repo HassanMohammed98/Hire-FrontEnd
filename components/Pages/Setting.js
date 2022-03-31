@@ -54,7 +54,7 @@ const Setting = ({ navigation }) => {
 export default Setting;
 
 const styles = StyleSheet.create({
-  screen: { height: "100%" },
+  screen: { flex: 1, backgroundColor: "white" },
   main: {
     justifyContent: "space-evenly",
 

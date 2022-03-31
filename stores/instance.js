@@ -4,7 +4,7 @@ import authStore from "./authStore";
 import messageStore from "./chatStore";
 import userStore from "./userStore";
 
-export const baseURL = "http://192.168.8.101:8000";
+export const baseURL = "http://192.168.166.114:8000";
 export const socket = io(baseURL);
 socket.on("chat", async function (msg) {
   console.log(
