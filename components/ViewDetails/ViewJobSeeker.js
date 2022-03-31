@@ -43,7 +43,7 @@ const ViewJobSeeker = ({ viewUser, details }) => {
               <Text style={styles.candidateName}> {details.lastname} </Text>
             )}
           </HStack>
-          {details.skils.length > 1 && <Text>{details.skils}</Text>}
+          {details.skills.length > 1 && <Text>{details.skills}</Text>}
           {details.gender.length > 1 && <Text>{details.gender}</Text>}
         </VStack>
       </HStack>
@@ -121,16 +121,16 @@ const ViewJobSeeker = ({ viewUser, details }) => {
       {/* )} */}
       <HStack w={"100%"} style={styles.footer}>
         {/* Fix Skills Naming */}
-        {details.skils.length > 0 && (
+        {details.skills.length > 0 && (
           <VStack w={"50%"} style={styles.bodyThree} space={2}>
-            <Text style={styles.skilsBody}>Skills</Text>
+            <Text style={styles.skillsBody}>Skills</Text>
             <Text>Development: *****</Text>
             <Text>Development: *****</Text>
             <Text>Development: *****</Text>
             <Text>Development: *****</Text>
           </VStack>
         )}
-        {details.skils.length > 0 && (
+        {details.skills.length > 0 && (
           <VStack w={"50%"} style={styles.bodyThree} space={2}>
             <Text style={styles.languageBody}>Languages</Text>
             <Text>English: *****</Text>

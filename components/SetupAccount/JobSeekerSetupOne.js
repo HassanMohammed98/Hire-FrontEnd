@@ -171,7 +171,7 @@ const JobSeekerSetupOne = ({ navigation }) => {
         <TextInput
           style={styles.textInputName}
           onChangeText={(skills) => setEditUser({ ...editUser, skills })}
-          placeholder="Skils"
+          placeholder="Skills"
         />
       </VStack>
       <AuthButtons action={createProfile} text={"Get Started"} Width={"100%"} />
