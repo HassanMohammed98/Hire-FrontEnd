@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Swiper from "../Pages/Swiper";
+import SwiperScreen from "../Pages/Swiper";
 import Details from "../Pages/Details";
 import ChatHistory from "../Pages/ChatHistory";
 import ChatLogs from "../Pages/ChatLogs";
@@ -39,7 +39,11 @@ const RootNavigator = () => {
         options={{ headerShown: false }}
       />
       <Screen name="RegisterJobseeker" component={RegisterJobseeker} />
-      <Screen name="Home" component={Swiper} options={{ headerShown: false }} />
+      <Screen
+        name="Home"
+        component={SwiperScreen}
+        options={{ headerShown: false }}
+      />
       <Screen
         name="ChatLogs"
         component={ChatLogs}

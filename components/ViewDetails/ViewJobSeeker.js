@@ -5,27 +5,166 @@ import { baseURL } from "../../stores/instance";
 
 const ViewJobSeeker = ({ viewUser, details }) => {
   return (
-    <View style={styles.main}>
-      <View style={styles.userContainer}>
-        <Image
-          style={styles.image}
-          source={{ uri: baseURL + viewUser.picture }}
-        />
-        <HStack style={styles.name}>
-          <Text style={styles.nameText}>{details.firstname}</Text>
-          <Text style={styles.nameText}>{details.lastname}</Text>
-        </HStack>
-        <Text style={styles.emailText}>{viewUser.email}</Text>
-        <View style={styles.education}>
-          <Text style={styles.Phone}> Phone: </Text>
-          <Text> {details.phone}</Text>
-          <Text style={styles.Phone}> Skills: {details.skills}</Text>
-          <Text>{details.skills}</Text>
-          <Text style={styles.Phone}> About:</Text>
-          <Text>{details.about}</Text>
-        </View>
-      </View>
-    </View>
+    <Text> About Me </Text>
+// <<<<<<< swiper-screen
+//     <ScrollView space={1} style={styles.parentPage}>
+//       <HStack style={styles.headerLayout} h={70} w={"100%"}>
+//         {/* <Text> {viewUser.picture} </Text> */}
+//         {viewUser.picture.length > 1 ? (
+//           <Image
+//             style={{
+//               height: "100%",
+//               aspectRatio: 1,
+//               zIndex: -1,
+//               borderRadius: 100,
+//               // borderColor: "black",
+//               // borderWidth: 3,
+//             }}
+//             alt="Profile Image"
+//             source={{ uri: baseURL + viewUser.picture }}
+//           />
+//         ) : (
+//           <Image
+//             style={{
+//               width: "22%",
+//               aspectRatio: 1,
+//             }}
+//             alt="JobSeeker Profile Image"
+//             source={require("../../assets/userProfile.png")}
+//           />
+//         )}
+//         <VStack w={"100%"} h={"60%"} style={styles.header}>
+//           <HStack>
+//             {details.prefix.length > 1 && (
+//               <Text style={styles.candidateName}>{details.prefix} </Text>
+//             )}
+//             {details.firstname.length > 1 && (
+//               <Text style={styles.candidateName}>{details.firstname}</Text>
+//             )}
+//             {details.lastname.length > 1 && (
+//               <Text style={styles.candidateName}> {details.lastname} </Text>
+//             )}
+//           </HStack>
+//           {details.skills.length > 1 && <Text>{details.skills}</Text>}
+//           {details.gender.length > 1 && <Text>{details.gender}</Text>}
+//         </VStack>
+//       </HStack>
+//       <VStack w={"100%"} style={styles.bodyOne} space={2}>
+//         <Text style={styles.aboutHeader}> About Me </Text>
+//         <Text style={styles.aboutHeaderBlack}>
+//           {" "}
+//           I am flexible and experienced individual with great experience in many
+//           fields especialy coding.{" "}
+//         </Text>
+//       </VStack>
+//       {/* {details.education.length > 0 && ( */}
+//       <VStack w={"100%"} style={styles.bodyTwo} space={2}>
+//         <Text style={styles.aboutHeader}>Education</Text>
+//         <Text style={styles.educationHeader}>Regis University</Text>
+//         <Text style={styles.educationbody}>
+//           DBA in Business Administration{" "}
+//         </Text>
+//         <Text style={styles.educationHeader}>CODED Academy</Text>
+//         <Text style={styles.educationbody}>
+//           Fullstack Bootcamp HTML, CSS, Javascript
+//         </Text>
+//       </VStack>
+//       {/* // )} */}
+//       {/* {details.experience.length > 0 && ( */}
+//       <VStack w={"100%"} style={styles.bodyTwo} space={2}>
+//         <Text style={styles.aboutHeader}>Experience</Text>
+//         <HStack style={styles.jobOpenning}>
+//           <Image
+//             style={{
+//               width: "22%",
+//               aspectRatio: 1,
+//             }}
+//             alt="JobSeeker Profile Image"
+//             source={require("../../assets/userProfile.png")}
+//           />
+//           <VStack style={styles.positionOpen}>
+//             <Text style={[styles.JobTitleOne]}>
+//               Junior Developer @Coded Fullstack Developer React, React Native,
+//               Javascript, CSS and HTML
+//             </Text>
+//             <Text style={styles.positionBody}>
+//               Responsible for growing company revenue by effectively managing
+//               existing customer accounts and convincing new customers to
+//               purchase company services .Leading a team of Account Executives,
+//               developing effective marketing proposals, and solicit customer
+//               feedback.
+//             </Text>
+//           </VStack>
+//         </HStack>
+//         <HStack style={styles.jobOpenning}>
+//           <Image
+//             style={{
+//               width: "22%",
+//               aspectRatio: 1,
+//             }}
+//             alt="JobSeeker Profile Image"
+//             source={require("../../assets/userProfile.png")}
+//           />
+//           <VStack style={styles.positionOpen}>
+//             <Text style={[styles.JobTitleOne]}>
+//               Business Administration Officer Needed @Coded to do Administration
+//               work
+//             </Text>
+//             <Text style={styles.positionBody}>
+//               Responsible for growing company revenue by effectively managing
+//               existing customer accounts and convincing new customers to
+//               purchase company services .Leading a team of Account Executives,
+//               developing effective marketing proposals, and solicit customer
+//               feedback.
+//             </Text>
+//           </VStack>
+//         </HStack>
+//       </VStack>
+//       {/* )} */}
+//       <HStack w={"100%"} style={styles.footer}>
+//         {/* Fix Skills Naming */}
+//         {details.skills.length > 0 && (
+//           <VStack w={"50%"} style={styles.bodyThree} space={2}>
+//             <Text style={styles.skillsBody}>Skills</Text>
+//             <Text>Development: *****</Text>
+//             <Text>Development: *****</Text>
+//             <Text>Development: *****</Text>
+//             <Text>Development: *****</Text>
+//           </VStack>
+//         )}
+//         {details.skills.length > 0 && (
+//           <VStack w={"50%"} style={styles.bodyThree} space={2}>
+//             <Text style={styles.languageBody}>Languages</Text>
+//             <Text>English: *****</Text>
+//             <Text>Arabic: *****</Text>
+//             <Text>Javascript: *****</Text>
+//           </VStack>
+//         )}
+//       </HStack>
+//     </ScrollView>
+// =======
+//     <View style={styles.main}>
+//       <View style={styles.userContainer}>
+//         <Image
+//           style={styles.image}
+//           source={{ uri: baseURL + viewUser.picture }}
+//         />
+//         <HStack style={styles.name}>
+//           <Text style={styles.nameText}>{details.firstname}</Text>
+//           <Text style={styles.nameText}>{details.lastname}</Text>
+//         </HStack>
+//         <Text style={styles.emailText}>{viewUser.email}</Text>
+//         <View style={styles.education}>
+//           <Text style={styles.Phone}> Phone: </Text>
+//           <Text> {details.phone}</Text>
+//           <Text style={styles.Phone}> Skills: {details.skills}</Text>
+//           <Text>{details.skills}</Text>
+//           <Text style={styles.Phone}> About:</Text>
+//           <Text>{details.about}</Text>
+//         </View>
+//       </View>
+//     </View>
+// >>>>>>> main
   );
 };
 export default ViewJobSeeker;
