@@ -350,6 +350,7 @@ const SwiperScreen = ({ navigation }) => {
             />
           )}
         </View>
+
         <View style={styles.buttonContainer}>
           <HStack style={styles.HStackbutton}>
             <TouchableOpacity

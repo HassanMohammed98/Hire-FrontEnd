@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import AuthButtons from "../miniComponents/Buttons/AuthButtons";
 import { Button, Row, ScrollView, useToast, VStack } from "native-base";
@@ -11,14 +11,16 @@ const Setting = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.screen}>
       <ScreenHeader owner={authStore.userOwner} navigation={navigation} />
-      <View>
-        <AuthButtons
-          action={() => {
-            navigation.navigate("Account");
-          }}
-          text={"Account"}
-          Width={"80%"}
-        />
+      <View style={styles.main}>
+        <TouchableOpacity>
+          <AuthButtons
+            action={() => {
+              navigation.navigate("Account");
+            }}
+            text={"Account"}
+            Width={"80%"}
+          />
+        </TouchableOpacity>
         <AuthButtons
           action={() => {
             navigation.navigate("profile");
@@ -26,13 +28,16 @@ const Setting = ({ navigation }) => {
           text={"Profile"}
           Width={"80%"}
         />
+
         <AuthButtons
           action={() => {
             authStore.signout(toast, navigation);
           }}
           text={"SIGN OUT"}
           Width={"80%"}
+          outLine={true}
         />
+
         {/* <Button
         style={styles.button}
         onPress={() => {
@@ -48,4 +53,11 @@ const Setting = ({ navigation }) => {
 
 export default Setting;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: { height: "100%" },
+  main: {
+    justifyContent: "space-evenly",
+
+    height: "60%",
+  },
+});
